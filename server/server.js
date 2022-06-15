@@ -14,3 +14,5 @@ app.use(
   })
 );
 app.use(cors());
+
+//app.use("/lakes", require("./routes/lakesRoute"));

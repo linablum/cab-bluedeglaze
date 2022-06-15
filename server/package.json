@@ -1,10 +1,11 @@
 {
   "name": "bluedeglaze",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Give information about lakes in Berlin and Brandenburg",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js",
     "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
   },
   "type": "module",
