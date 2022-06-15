@@ -1,0 +1,15 @@
+{
+  "name": "bluedeglaze",
+  "version": "1.0.0",
+  "description": "Give information about lakes in Berlin and Brandenburg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Angelina Blumenthal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.8"
+  }
+}
