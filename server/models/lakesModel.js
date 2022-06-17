@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const lakeSchema = new mongoose.Schema({
+const lakeSchema = new Schema({
   _id: Schema.Types.ObjectId,
   name: {
     type: String,
@@ -9,13 +10,11 @@ const lakeSchema = new mongoose.Schema({
   },
   area: String,
   location: String,
-  //  review: {
-  //    type: String,
-  //  },
-  meta: {
+  author: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  /*   meta: {
     bookmark: Number,
     favs: Number,
-  },
+  }, */
 });
 
 const Lake = mongoose.model("Lake", lakeSchema);

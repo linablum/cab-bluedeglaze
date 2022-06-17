@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import lakes from "./routes/lakes.js";
+import lakeDetails from "./routes/lakeDetails.js";
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ const startServer = () => {
 
 const loadRoutes = () => {
   app.use("/lakes", lakes);
+  app.use("/lakedetails", lakeDetails);
 };
 
 const middlewareSetup = () => {
