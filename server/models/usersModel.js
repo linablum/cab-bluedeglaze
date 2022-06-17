@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
+  _id: Schema.Types.ObjectId,
   name: {
     type: String,
     required: true,
@@ -16,6 +17,7 @@ const userSchema = new mongoose.Schema({
     //    required: true,
   },
   addedlakes: Array,
+  image: String,
 });
 
 const User = mongoose.model("user", userSchema);
