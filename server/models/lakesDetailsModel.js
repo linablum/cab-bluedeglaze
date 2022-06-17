@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
 const lakeDetailsSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  ref: [Schema.Types.ObjectId],
   review: {
     type: String,
   },
