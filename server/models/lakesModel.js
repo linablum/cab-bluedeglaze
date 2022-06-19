@@ -11,10 +11,10 @@ const lakeSchema = new Schema({
   area: String,
   location: String,
   author: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  /*   meta: {
+  meta: {
     bookmark: Number,
-    favs: Number,
-  }, */
+    likes: Number,
+  },
 });
 
 const Lake = mongoose.model("Lake", lakeSchema);

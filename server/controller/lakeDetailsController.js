@@ -7,7 +7,7 @@ const getAllLakeDetails = async (req, res) => {
     console.log(allLakeDetails);
   } catch {
     res
-      .status(400)
+      .status(500)
       .json({ error: error, message: "Something went wrong with the server." });
   }
 };
