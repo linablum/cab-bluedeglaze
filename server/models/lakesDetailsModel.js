@@ -31,10 +31,6 @@ const lakeDetailSchema = new Schema({
   waterquality: String,
   parking: String,
   shadow: String,
-  meta: {
-    bookmark: Number,
-    favs: Number,
-  },
   author: String,
   distancecenter: Number,
   tipps: {
