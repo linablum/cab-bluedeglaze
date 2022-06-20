@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import lakes from "./routes/lakes.js";
-import lakeDetails from "./routes/lakeDetails.js";
+import lakesRoute from "./routes/lakesRoute.js";
+import lakeDetailsRoute from "./routes/lakeDetailsRoute.js";
+import usersRoute from "./routes/usersRoute.js";
 
 const app = express();
 dotenv.config();
@@ -16,8 +17,9 @@ const startServer = () => {
 };
 
 const loadRoutes = () => {
-  app.use("/lakes", lakes);
-  app.use("/lakedetails", lakeDetails);
+  app.use("/api/lakes", lakesRoute);
+  app.use("/api/lakedetails", lakeDetailsRoute);
+  app.use("/api/users", usersRoute);
 };
 
 const middlewareSetup = () => {
