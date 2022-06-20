@@ -17,10 +17,12 @@ const userSchema = new Schema({
     type: String,
     //    required: true,
   },
-  /*   addedlakes: {
-    type: Schema.Types.Array,
-    ref: "Lake",
-  }, */
+  addedlakes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Lake",
+    },
+  ],
   image: String,
   likes: Number,
   bookmarks: Number,

@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const lakeDetailSchema = new Schema({
   _id: { type: Schema.Types.ObjectId, ref: "Lake" },
-  author: { type: Schema.Types.ObjectId, ref: "User" },
+  author: { type: Schema.Types.ObjectId, ref: "User", select: ["name"] },
   review: {
     type: String,
   },
