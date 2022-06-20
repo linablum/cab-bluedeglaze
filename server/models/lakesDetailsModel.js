@@ -2,12 +2,8 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const lakeDetailSchema = new Schema({
-  _id: [{ type: Schema.Types.ObjectId, ref: "Lake" }],
-  name: [{ type: Schema.Types.ObjectId, ref: "Lake" }],
-  area: [{ type: Schema.Types.ObjectId, ref: "Lake" }],
-  location: [{ type: Schema.Types.ObjectId, ref: "Lake" }],
-  author: [{ type: Schema.Types.ObjectId, ref: "User" }],
-
+  _id: { type: Schema.Types.ObjectId, ref: "Lake" },
+  author: { type: Schema.Types.ObjectId, ref: "User" },
   review: {
     type: String,
   },
@@ -41,6 +37,6 @@ const lakeDetailSchema = new Schema({
   //  image:
 });
 
-const LakeDetail = mongoose.model("Lake Detail", lakeDetailSchema);
+const LakeDetail = mongoose.model("LakeDetail", lakeDetailSchema);
 
 export default LakeDetail;

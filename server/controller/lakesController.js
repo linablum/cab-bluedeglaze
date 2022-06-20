@@ -14,17 +14,20 @@ const getAllLakes = async (req, res) => {
 
 const getLakesByArea = async (req, res) => {
   const { likes } = req.query;
+  // no city with that amount of likes
   if (likes) {
     const lakesByArea = await Lake.find({
       area: req.params.area,
       "meta.likes": { $gte: likes },
-    }).exec();
-    res.status(200).json({ lakesByArea });
+    })
+      .populate({ path: "author" })
+      .exec();
+    res.status(200).json({ lakesByArea, number: lakesByArea.length });
   } else {
     try {
-      const lakesByArea = await Lake.find({
-        area: req.params.area,
-      }).exec();
+      const lakesByArea = await Lake.find({ area: req.params.area })
+        .populate({ path: "author" })
+        .exec();
       if (lakesByArea.length === 0) {
         res.status(200).json({ message: "No area found" });
       }

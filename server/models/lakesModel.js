@@ -10,7 +10,7 @@ const lakeSchema = new Schema({
   },
   area: String,
   location: String,
-  author: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  author: { type: Schema.Types.ObjectId, ref: "User" },
   meta: {
     bookmark: Number,
     likes: Number,

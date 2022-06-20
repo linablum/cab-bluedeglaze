@@ -17,10 +17,15 @@ const userSchema = new Schema({
     type: String,
     //    required: true,
   },
-  addedlakes: Array,
+  /*   addedlakes: {
+    type: Schema.Types.Array,
+    ref: "Lake",
+  }, */
   image: String,
+  likes: Number,
+  bookmarks: Number,
 });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;
