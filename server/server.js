@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import lakesRoute from "./routes/lakesRoute.js";
 import lakeDetailsRoute from "./routes/lakeDetailsRoute.js";
 import usersRoute from "./routes/usersRoute.js";
+import { cloudinaryConfig } from "./config/cloudinaryConfig.js";
 
 const app = express();
 dotenv.config();
@@ -34,6 +35,7 @@ const middlewareSetup = () => {
     credentials: true,
   };
   app.use(cors(corsOptions));
+  cloudinaryConfig();
 };
 
 const mongoDbConection = async () => {
