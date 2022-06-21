@@ -1,8 +1,10 @@
 import express from "express";
-//import { getAllLakes, getLakesByArea } from "../controller/lakesController.js";
+import { signUp, uploadUserPicture } from "../controller/usersController.js";
+import { multerUploads } from "../middlewares/multer.js";
 
 const router = express.Router();
 
-router.get("/users");
+router.post("/imageUpload", multerUploads.single("image"), uploadUserPicture);
+router.post("/signup", signUp);
 
 export default router;
