@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import userModel from "../models/userModel.js";
+import userModel from "../models/usersModel.js";
 import encryptPassword from "../utils/encryptPassword.js";
 // import bcrypt from "bcrypt";
 
@@ -8,17 +8,17 @@ const uploadUserPicture = async (req, res) => {
   try {
     console.log("req.file", req.file);
     const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-      folder: "quokkas-spike",
+      folder: "bluedeglaze-user",
     });
     console.log("result", uploadResult);
     res.status(200).json({
-      message: "image succesfully uploaded",
+      message: "Image succesfully uploaded.",
       imageUrL: uploadResult.url,
     });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "image couldn't be uploaded", error: error });
+      .json({ message: "Image couldn't be uploaded.", error: error });
   }
 };
 
