@@ -23,7 +23,7 @@ const userSchema = new Schema({
       ref: "Lake",
     },
   ],
-  image: String,
+  avatarPicture: String,
   likes: Number,
   bookmarks: Number,
 });
