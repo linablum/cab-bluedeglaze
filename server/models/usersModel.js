@@ -5,6 +5,15 @@ const userSchema = new Schema({
   userName: {
     type: String,
     required: true,
+    unique: true,
+    min: 3,
+    max: 30,
+  },
+  name: {
+    type: String,
+    required: true,
+    min: 3,
+    max: 50,
   },
   email: {
     type: String,
@@ -13,11 +22,22 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    equired: true,
+    required: true,
+    min: 6,
+    max: 20,
   },
-  avatarPicture: String,
-  likes: Number,
-  bookmarks: Number,
+  avatarPicture: {
+    type: String,
+    //  default:"",
+  },
+  likes: {
+    type: Array,
+    default: [],
+  },
+  bookmarks: {
+    type: Array,
+    default: [],
+  },
   addedlakes: [
     {
       type: Schema.Types.ObjectId,
