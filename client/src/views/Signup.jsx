@@ -10,9 +10,7 @@ function SignUp() {
   };
 
   const attachFileHandler = (e) => {
-    // console.log(e.target.files);
     setSelectedFile(e.target.files[0]);
-    // console.log(selectedFile);
   };
 
   const submitForm = async (e) => {
@@ -43,7 +41,6 @@ function SignUp() {
     }
   };
 
-  //REVIEW 25. Create signUp function
   const signUp = async () => {
     //verify all necessary fields are filled
     // verify email / password length and strength with Regex
@@ -51,6 +48,7 @@ function SignUp() {
     //check code in Postman to see how composes the object that is sent in request's body
     let urlencoded = new URLSearchParams();
     urlencoded.append("userName", newUser.userName);
+    urlencoded.append("name", newUser.name);
     urlencoded.append("email", newUser.email);
     urlencoded.append("password", newUser.password);
     urlencoded.append(
@@ -60,13 +58,11 @@ function SignUp() {
         : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
     );
 
-    //REVIEW 25.1 Create and define the request options, including the objet created in the body
     var requestOptions = {
       method: "POST",
       body: urlencoded,
     };
 
-    //REVIEW 25.2 Fetch endpoint attaching the request options. Display succes/error message to user.
     try {
       const response = await fetch(
         "http://localhost:5000/api/users/signUp",
@@ -97,6 +93,16 @@ function SignUp() {
           />
         </div>
         <div>
+          <label htmlFor="username">Name</label>
+          <input
+            id="name"
+            type="text"
+            value={newUser.name ? newUser.name : ""}
+            name="name"
+            onChange={handleChangeHandler}
+          />
+        </div>
+        <div>
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -116,12 +122,10 @@ function SignUp() {
             onChange={handleChangeHandler}
           />
         </div>
-        {/* REVIEW 13.1 create form element with input and button to submit the form */}
         <form>
           <input type="file" onChange={attachFileHandler} />
           <button onClick={submitForm}>Upload picture</button>
         </form>
-        {/* REVIEW 13.4. Conditional rendering of the user's pic, if there is one */}
         {newUser.avatarPicture && (
           <img src={newUser.avatarPicture} alt="userPic" />
         )}

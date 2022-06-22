@@ -46,6 +46,7 @@ const signUp = async (req, res) => {
       console.log("hashedPassword", hashedPassword);
       const newUser = new User({
         userName: req.body.userName,
+        name: req.body.name,
         email: req.body.email,
         password: hashedPassword,
         avatarPicture: req.body.avatarPicture,
@@ -55,6 +56,7 @@ const signUp = async (req, res) => {
         res.status(201).json({
           user: {
             userName: savedUser.userName,
+            name: savedUser.name,
             email: savedUser.email,
             avatarPicture: savedUser.avatarPicture,
           },
