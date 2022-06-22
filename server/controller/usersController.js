@@ -1,7 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
-import userModel from "../models/usersModel.js";
-import encryptPassword from "../utils/encryptPassword.js";
-// import bcrypt from "bcrypt";
+import User from "../models/usersModel.js";
+//import encryptPassword from "../utils/encryptPassword.js";
 
 const uploadUserPicture = async (req, res) => {
   console.log("req.body", req.body);
@@ -22,19 +21,33 @@ const uploadUserPicture = async (req, res) => {
   }
 };
 
+import bcrypt from "bcrypt";
+
+const encryptPassword = async (password) => {
+  try {
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    console.log("salt", salt);
+    const hashPassword = await bcrypt.hash(password, salt);
+    return hashPassword;
+  } catch (error) {
+    console.log("Error hashing password.", error);
+  }
+};
+
 const signUp = async (req, res) => {
   try {
     console.log(req.body);
-    const existingUser = await userModel.findOne({ email: req.body.email });
+    const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      res.status(409).json({ message: "user already exists" });
+      res.status(409).json({ message: "User already exists!" });
     } else {
-      const hashedPassword = await encryptPassword(req.body.password);
-      console.log("hashedPassword", hashedPassword);
-      const newUser = new userModel({
+      // const hashedPassword = await encryptPassword(req.body.password);
+      // console.log("hashedPassword", hashedPassword);
+      const newUser = new User({
         userName: req.body.userName,
         email: req.body.email,
-        password: hashedPassword,
+        password: /* hashedPassword */ req.body.password,
         avatarPicture: req.body.avatarPicture,
       });
       try {
@@ -45,18 +58,18 @@ const signUp = async (req, res) => {
             email: savedUser.email,
             avatarPicture: savedUser.avatarPicture,
           },
-          message: "user registered",
+          message: "User registered",
         });
       } catch (error) {
         res
           .status(409)
-          .json({ message: "error while saving new user", error: error });
+          .json({ message: "Error while saving new user.", error: error });
       }
     }
   } catch (error) {
     res
       .status(401)
-      .json({ message: "registration not possible", error: error });
+      .json({ message: "Registration not possible.", error: error });
   }
 };
 

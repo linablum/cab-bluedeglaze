@@ -2,30 +2,28 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  _id: Schema.Types.ObjectId,
-  name: {
+  userName: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
   },
   email: {
     type: String,
-    required: true,
+    //required: true,
     unique: true,
   },
   password: {
     type: String,
-    //    required: true,
+    //required: true,
   },
+  avatarPicture: String,
+  /*   likes: Number,
+  bookmarks: Number,
   addedlakes: [
     {
       type: Schema.Types.ObjectId,
       ref: "Lake",
     },
-  ],
-  avatarPicture: String,
-  likes: Number,
-  bookmarks: Number,
+  ], */
 });
 
 const User = mongoose.model("User", userSchema);

@@ -4,11 +4,11 @@ const encryptPassword = async (password) => {
   try {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
+    console.log("salt", salt);
     const hashPassword = await bcrypt.hash(password, salt);
-
     return hashPassword;
   } catch (error) {
-    console.log("error hashing password", error);
+    console.log("Error hashing password.", error);
   }
 };
 
