@@ -42,12 +42,12 @@ const signUp = async (req, res) => {
     if (existingUser) {
       res.status(409).json({ message: "User already exists!" });
     } else {
-      // const hashedPassword = await encryptPassword(req.body.password);
-      // console.log("hashedPassword", hashedPassword);
+      const hashedPassword = await encryptPassword(req.body.password);
+      console.log("hashedPassword", hashedPassword);
       const newUser = new User({
         userName: req.body.userName,
         email: req.body.email,
-        password: /* hashedPassword */ req.body.password,
+        password: hashedPassword,
         avatarPicture: req.body.avatarPicture,
       });
       try {
@@ -73,4 +73,6 @@ const signUp = async (req, res) => {
   }
 };
 
-export { uploadUserPicture, signUp };
+const logIn = async (req, res) => {};
+
+export { uploadUserPicture, signUp, logIn };

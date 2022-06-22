@@ -4,26 +4,26 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   userName: {
     type: String,
-    // required: true,
+    required: true,
   },
   email: {
     type: String,
-    //required: true,
+    required: true,
     unique: true,
   },
   password: {
     type: String,
-    //required: true,
+    equired: true,
   },
   avatarPicture: String,
-  /*   likes: Number,
+  likes: Number,
   bookmarks: Number,
   addedlakes: [
     {
       type: Schema.Types.ObjectId,
       ref: "Lake",
     },
-  ], */
+  ],
 });
 
 const User = mongoose.model("User", userSchema);
