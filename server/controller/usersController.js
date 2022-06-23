@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import User from "../models/usersModel.js";
-//import encryptPassword from "../utils/encryptPassword.js";
+import encryptPassword from "../utils/encryptPassword.js";
 
 const uploadUserPicture = async (req, res) => {
   console.log("req.body", req.body);
@@ -18,20 +18,6 @@ const uploadUserPicture = async (req, res) => {
     res
       .status(500)
       .json({ message: "Image couldn't be uploaded.", error: error });
-  }
-};
-
-import bcrypt from "bcrypt";
-
-const encryptPassword = async (password) => {
-  try {
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    console.log("salt", salt);
-    const hashPassword = await bcrypt.hash(password, salt);
-    return hashPassword;
-  } catch (error) {
-    console.log("Error hashing password.", error);
   }
 };
 
