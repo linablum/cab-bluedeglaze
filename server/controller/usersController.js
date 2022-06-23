@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import User from "../models/usersModel.js";
-import encryptPassword from "../utils/encryptPassword.js";
+import encryptPassword from "../utils/bycrypt.js";
 
 const uploadUserPicture = async (req, res) => {
   console.log("req.body", req.body);
@@ -61,6 +61,40 @@ const signUp = async (req, res) => {
   }
 };
 
-const logIn = async (req, res) => {};
+const logIn = async (req, res) => {
+  const existingUser = await userModel.findOne({ email: req.body.email });
+  if (!existingUser) {
+    res.status(401).json({
+      msg: "you have to register first",
+    });
+  } else {
+    const verified = await verifyPassword(
+      req.body.password,
+      existingUser.password
+    );
+    console.log("exisiting user password", existingUser.password);
+    console.log("exisiting user password", req.body.password);
+    if (!verified) {
+      res.status(401).json({
+        msg: "wrong password",
+      });
+    } else {
+      console.log("verified", verified);
+      const token = issueToken(existingUser.id);
+
+      res.status(200).json({
+        msg: "logging succesful",
+        user: {
+          userName: existingUser.userName,
+          name: existingUser.name,
+          email: existingUser.email,
+          id: existingUser._id,
+          avatarPicture: existingUser.avatarPicture,
+        },
+        token,
+      });
+    }
+  }
+};
 
 export { uploadUserPicture, signUp, logIn };

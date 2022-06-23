@@ -4,7 +4,6 @@ const encryptPassword = async (password) => {
   try {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
-    console.log("salt", salt);
     const hashPassword = await bcrypt.hash(password, salt);
     return hashPassword;
   } catch (error) {
@@ -12,4 +11,10 @@ const encryptPassword = async (password) => {
   }
 };
 
-export default encryptPassword;
+const verifyPassword = async (password, hashedPassword) => {
+  const verfied = await bcrypt.compare(password, hashedPassword);
+  console.log("verifyPassword", verifyPassword);
+  return verfied;
+};
+
+export { encryptPassword, verifyPassword };
