@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import User from "../models/usersModel.js";
-import encryptPassword from "../utils/bycrypt.js";
+import { encryptPassword, verifyPassword } from "../utils/bycrypt.js";
+import { issueToken } from "../utils/jwt.js";
 
 const uploadUserPicture = async (req, res) => {
   console.log("req.body", req.body);
@@ -62,7 +63,7 @@ const signUp = async (req, res) => {
 };
 
 const logIn = async (req, res) => {
-  const existingUser = await userModel.findOne({ email: req.body.email });
+  const existingUser = await User.findOne({ email: req.body.email });
   if (!existingUser) {
     res.status(401).json({
       msg: "you have to register first",
