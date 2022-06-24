@@ -98,4 +98,13 @@ const logIn = async (req, res) => {
   }
 };
 
-export { uploadUserPicture, signUp, logIn };
+const getProfile = (req, res) => {
+  console.log("req.user", req.user);
+  res.status(200).json({
+    email: req.user.email,
+    userName: req.user.userName,
+    avatar: req.user.avatarPicture,
+  });
+};
+
+export { uploadUserPicture, signUp, logIn, getProfile };

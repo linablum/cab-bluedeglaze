@@ -6,6 +6,8 @@ import lakesRoute from "./routes/lakesRoute.js";
 import lakeDetailsRoute from "./routes/lakeDetailsRoute.js";
 import usersRoute from "./routes/usersRoute.js";
 import { cloudinaryConfig } from "./config/cloudinaryConfig.js";
+import passportConfig from "./config/passportConfig.js";
+import passport from "passport";
 
 const app = express();
 dotenv.config();
@@ -36,6 +38,8 @@ const middlewareSetup = () => {
   };
   app.use(cors(corsOptions));
   cloudinaryConfig();
+  app.use(passport.initialize());
+  passportConfig(passport);
 };
 
 const mongoDbConection = async () => {
