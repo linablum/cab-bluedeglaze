@@ -26,6 +26,7 @@ const userSchema = new Schema({
     min: 6,
     max: 20,
   },
+  //role: String,
   avatarPicture: {
     type: String,
     //  default:"",
