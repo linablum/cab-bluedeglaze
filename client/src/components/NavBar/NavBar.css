@@ -1,0 +1,28 @@
+.navbar-brand {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #f9fcfb !important;
+  text-transform: uppercase;
+}
+
+.navbar {
+  margin: 0 0 !important;
+}
+
+.nav-link {
+  padding: 10px 30px !important;
+  color: #f9fcfb !important;
+  text-align: center !important;
+  text-transform: uppercase;
+}
+
+.navbar-toggler {
+  background-position: center;
+  color: #ffffff !important;
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url(../../assets/menu.png) !important;
+  background-size: 40px;
+}

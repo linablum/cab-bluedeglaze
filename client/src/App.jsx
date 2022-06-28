@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import { getToken } from "./utils/getToken";
 import { useEffect } from "react";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 //import SignUp from "./views/Signup";
 
 function App() {
