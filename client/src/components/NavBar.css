@@ -1,12 +1,5 @@
-.navbar-brand,
-.navbar-brand:hover {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 24px;
-  color: #fafcfd;
-}
-
-.custom_nav-container .nav_search-btn {
+/* .custom_nav-container .nav_search-btn {
+  background-image: url(../images/search-icon.png);
   background-size: 22px;
   background-repeat: no-repeat;
   background-position-y: 7px;
@@ -14,34 +7,39 @@
   height: 35px;
   padding: 0;
   border: none;
-}
+} */
 
-.navbar-brand {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.navbar-brand span {
+/* .navbar-brand span {
   font-size: 20px;
   font-weight: 700;
   color: #f9fcfb;
   margin-top: 5px;
   text-transform: uppercase;
-}
+} */
 
-.custom_nav-container {
+/* .custom_nav-container {
   z-index: 99999;
   padding: 5px 0;
+} */
+
+.Header {
+  margin: 0 auto;
 }
 
-.custom_nav-container .navbar-toggler {
-  outline: none;
+.custom_nav-container.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 10px 30px;
+  color: #f9fcfb;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-.custom_nav-container .navbar-toggler .navbar-toggler-icon {
+.navbar-toggler {
+  background-position: center;
+  color: #ffffff !important;
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url(../assets/menu.png) !important;
   background-size: 40px;
 }

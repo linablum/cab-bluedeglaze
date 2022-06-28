@@ -1,12 +1,18 @@
-import { Navbar, Nav, Container } from "react-bootstrap";
+import React from "react";
 import "./NavBar.css";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
 
 function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
         <Navbar.Brand href="#home">BLUE DEGLAZE</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle
+          className="navbar-toggler"
+          aria-controls="responsive-navbar-nav"
+        />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#home">HOME</Nav.Link>
