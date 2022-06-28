@@ -1,16 +1,23 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
+import "./NavBar.css";
 
 function NavBar() {
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar collapseOnSelect expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Blue Deglaze</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Lakes</Nav.Link>
-          <Nav.Link href="#features">Profile</Nav.Link>
-          <Nav.Link href="#pricing">About</Nav.Link>
-        </Nav>
+        <Navbar.Brand href="#home">BLUE DEGLAZE</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="#home">HOME</Nav.Link>
+            <Nav.Link href="#about">ABOUT</Nav.Link>
+            <Nav.Link href="#lakes">LAKES</Nav.Link>
+            <Nav.Link href="#login">LOGIN</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link href="#profile">PROFILE</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

@@ -2,9 +2,6 @@ import "./App.css";
 import { useState } from "react";
 import { getToken } from "./utils/getToken";
 import { useEffect } from "react";
-import Login from "./views/Login";
-import SignUp from "./views/Signup";
-import Profile from "./views/Profile";
 import NavBar from "./components/NavBar";
 //import SignUp from "./views/Signup";
 
@@ -37,10 +34,10 @@ function App() {
     <div className="bg">
       <div className="App">
         <NavBar />
-        <Login />
+        {/*         <Login />
         <button onClick={logOut} style={{ backgroundColor: "red" }}>
           logout
-        </button>
+        </button> */}
       </div>
     </div>
   );

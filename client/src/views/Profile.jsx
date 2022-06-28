@@ -31,7 +31,7 @@ function Profile() {
       setError("login first");
     }
 
-    const submitHandler = async (e) => {
+    /* const submitHandler = async (e) => {
       e.preventDefault();
       const updateUserWithPic = {
         userId: loggedUser._id,
@@ -56,7 +56,7 @@ function Profile() {
       } catch (err) {
         console.log("error", err.message);
       }
-    };
+    }; */
   };
   return (
     <div>

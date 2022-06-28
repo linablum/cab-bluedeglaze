@@ -1,0 +1,47 @@
+.navbar-brand,
+.navbar-brand:hover {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 24px;
+  color: #fafcfd;
+}
+
+.custom_nav-container .nav_search-btn {
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position-y: 7px;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: none;
+}
+
+.navbar-brand {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.navbar-brand span {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f9fcfb;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+.custom_nav-container {
+  z-index: 99999;
+  padding: 5px 0;
+}
+
+.custom_nav-container .navbar-toggler {
+  outline: none;
+}
+
+.custom_nav-container .navbar-toggler .navbar-toggler-icon {
+  background-size: 40px;
+}
