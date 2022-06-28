@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Login from "./views/Login";
 import SignUp from "./views/Signup";
 import Profile from "./views/Profile";
+import NavBar from "./components/NavBar";
 //import SignUp from "./views/Signup";
 
 function App() {
@@ -33,13 +34,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <SignUp />
-      <Login />
-      <button onClick={logOut} style={{ backgroundColor: "red" }}>
-        logout
-      </button>
-      <Profile />
+    <div className="bg">
+      <div className="App">
+        <NavBar />
+        <Login />
+        <button onClick={logOut} style={{ backgroundColor: "red" }}>
+          logout
+        </button>
+      </div>
     </div>
   );
 }
