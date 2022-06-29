@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import "./views.css";
 
 function Login() {
   const [loginUser, setLoginUser] = useState({});

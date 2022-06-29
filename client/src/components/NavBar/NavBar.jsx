@@ -8,7 +8,7 @@ function NavBar() {
   return (
     <Navbar className="navbar" collapseOnSelect expand="lg">
       <Container>
-        <Navbar.Brand className="navbar-brand" href="#home">
+        <Navbar.Brand className="navbar-brand" href="/">
           BLUE DEGLAZE
         </Navbar.Brand>
         <Navbar.Toggle
@@ -17,7 +17,7 @@ function NavBar() {
         />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className="nav-link" href="/home">
+            <Nav.Link className="nav-link" href="/">
               home
             </Nav.Link>
             <Nav.Link className="nav-link" href="/about">

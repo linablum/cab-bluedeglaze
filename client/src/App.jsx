@@ -31,20 +31,17 @@ function App() {
   }, [user]);
 
   return (
-    <div className="bg">
-      <div className="App">
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/lakes" element={<Lakes />} />
-          <Route path="/login" element={<Login />} />
-          {/*  <Route path="/logout" element={<Logout />} /> */}
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/chat" />
-        </Routes>
-        <Home />
-      </div>
+    <div className="App">
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/lakes" element={<Lakes />} />
+        <Route path="/login" element={<Login />} />
+        {/*  <Route path="/logout" element={<Logout />} /> */}
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/chat" />
+      </Routes>
     </div>
   );
 }

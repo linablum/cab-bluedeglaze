@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { getToken } from "../utils/getToken.js";
+import "./views.css";
 
 function Profile() {
   const [userProfile, setUserProfile] = useState(null);

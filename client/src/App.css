@@ -1,31 +1,5 @@
 body {
   font-family: "Poppins", sans-serif !important;
-  color: #0c0c0c;
-  background-color: #ffffff;
-}
-
-.bg {
-  height: 94vh;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#085078),
-    to(#85d8ce)
-  );
-  background: linear-gradient(to right, #085078, #85d8ce);
-}
-
-.bg::before {
-  content: "";
-  position: absolute;
-  width: 58%;
-  height: 86%;
-  background-image: url(./assets/hero-bg.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  top: 25px;
-  right: 0;
 }
 
 .App {

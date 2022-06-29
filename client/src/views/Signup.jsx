@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./views.css";
 
 function SignUp() {
   const [selectedFile, setSelectedFile] = useState(null);
