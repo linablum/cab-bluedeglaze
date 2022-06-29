@@ -1,9 +1,14 @@
 import "./App.css";
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { getToken } from "./utils/getToken";
 import { useEffect } from "react";
 import NavBar from "./components/NavBar/NavBar";
-import LandingCarousel from "./components/Carousel/Carousel";
+import Login from "./views/Login";
+import Signup from "./views/Signup";
+import Profile from "./views/Profile";
+import Lakes from "./views/Lakes";
+import Home from "./views/Home";
 
 function App() {
   // move to auth context
@@ -25,20 +30,20 @@ function App() {
     isUserLoggedIn();
   }, [user]);
 
-  const logOut = () => {
-    localStorage.removeItem("token");
-    setUser(false);
-  };
-
   return (
     <div className="bg">
       <div className="App">
         <NavBar />
-        <LandingCarousel />
-        {/*         <Login />
-        <button onClick={logOut} style={{ backgroundColor: "red" }}>
-          logout
-        </button> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/lakes" element={<Lakes />} />
+          <Route path="/login" element={<Login />} />
+          {/*  <Route path="/logout" element={<Logout />} /> */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/chat" />
+        </Routes>
+        <Home />
       </div>
     </div>
   );

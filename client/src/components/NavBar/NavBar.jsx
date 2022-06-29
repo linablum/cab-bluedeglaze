@@ -17,21 +17,21 @@ function NavBar() {
         />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className="nav-link" href="#home">
+            <Nav.Link className="nav-link" href="/home">
               home
             </Nav.Link>
-            <Nav.Link className="nav-link" href="#about">
+            <Nav.Link className="nav-link" href="/about">
               about
             </Nav.Link>
-            <Nav.Link className="nav-link" href="#lakes">
+            <Nav.Link className="nav-link" href="/lakes">
               lakes
             </Nav.Link>
-            <Nav.Link className="nav-link" href="#login">
+            <Nav.Link className="nav-link" href="/login">
               login
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link className="nav-link" href="#profile">
+            <Nav.Link className="nav-link" href="/profile">
               profile
             </Nav.Link>
           </Nav>
