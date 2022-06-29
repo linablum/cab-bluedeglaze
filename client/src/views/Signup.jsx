@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./views.css";
+import "./Signup.css";
 
 function SignUp() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -16,10 +16,8 @@ function SignUp() {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    console.log("submit working");
     // call  FormData object constructor to populate with pairs of key/values (in this case {image: "our file"} )
     const formData = new FormData();
-    console.log("selectedFile", selectedFile);
     formData.append("image", selectedFile);
     console.log("formData", formData);
     // compose the object with the options to be sent with our request, including the type of method, and use the body of the request to attach data
@@ -32,9 +30,7 @@ function SignUp() {
         "http://localhost:5000/api/users/imageUpload",
         requestOptions
       );
-      console.log("response", response);
       const result = await response.json();
-      console.log("result", result);
       setNewUser({ ...newUser, avatarPicture: result.imageUrL }); // imageURL is how the field is defined in usersController.
       console.log(newUser);
     } catch (error) {
@@ -124,7 +120,14 @@ function SignUp() {
           />
         </div>
         <form>
-          <input type="file" onChange={attachFileHandler} />
+          <label hmtmlFor="pictureUpload" className="btnFile">
+            Choose file
+            <input
+              type="file"
+              id="pictureUpload"
+              onChange={attachFileHandler}
+            />
+          </label>
           <button onClick={submitForm}>Upload picture</button>
         </form>
         {newUser.avatarPicture && (
