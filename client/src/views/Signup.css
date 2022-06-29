@@ -1,3 +1,14 @@
+/* input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: #f2f3f4;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  height: 50px;
+}
+ */
 button {
   display: inline-block;
   padding: 12px 40px;
@@ -22,7 +33,7 @@ button:hover {
   transform: translateY(-7px);
 }
 
-input {
+.btnFile input {
   display: none;
 }
 

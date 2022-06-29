@@ -1,13 +1,14 @@
-/* 
+import React from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-  const logOut = () => {
-    localStorage.removeItem("token");
-    setUser(false);
-  };
+function Logout() {
+  const { logOut } = useContext(AuthContext);
+  return (
+    <button onClick={logOut} style={{ backgroundColor: "red" }}>
+      logout
+    </button>
+  );
+}
 
-
-
-<button onClick={logOut} style={{ backgroundColor: "red" }}>
-  logout
-</button>;
- */
+export default Logout;

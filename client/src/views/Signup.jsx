@@ -1,11 +1,27 @@
 import { useState } from "react";
+import { useContext } from "react";
 import "./Signup.css";
+import { AuthContext } from "../context/AuthContext";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 function SignUp() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [newUser, setNewUser] = useState({});
+  const { newUser, setNewUser, setSelectedFile, signUp, submitForm } =
+    useContext(AuthContext);
 
-  //REVIEW 24. create on event handler function for the 3 events OR create one event handle function for each of them
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (e) => {
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setValidated(true);
+  };
+
   const handleChangeHandler = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
@@ -14,70 +30,85 @@ function SignUp() {
     setSelectedFile(e.target.files[0]);
   };
 
-  const submitForm = async (e) => {
-    e.preventDefault();
-    // call  FormData object constructor to populate with pairs of key/values (in this case {image: "our file"} )
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-    console.log("formData", formData);
-    // compose the object with the options to be sent with our request, including the type of method, and use the body of the request to attach data
-    const requestOptions = {
-      method: "POST",
-      body: formData,
-    };
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/imageUpload",
-        requestOptions
-      );
-      const result = await response.json();
-      setNewUser({ ...newUser, avatarPicture: result.imageUrL }); // imageURL is how the field is defined in usersController.
-      console.log(newUser);
-    } catch (error) {
-      console.log('"error submiting picture"', error);
-    }
-  };
-
-  const signUp = async () => {
-    //verify all necessary fields are filled
-    // verify email / password length and strength with Regex
-
-    //check code in Postman to see how composes the object that is sent in request's body
-    let urlencoded = new URLSearchParams();
-    urlencoded.append("userName", newUser.userName);
-    urlencoded.append("name", newUser.name);
-    urlencoded.append("email", newUser.email);
-    urlencoded.append("password", newUser.password);
-    urlencoded.append(
-      "avatarPicture",
-      newUser.avatarPicture
-        ? newUser.avatarPicture
-        : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
-    );
-
-    var requestOptions = {
-      method: "POST",
-      body: urlencoded,
-    };
-
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/signUp",
-        requestOptions
-      );
-      const results = await response.json();
-      console.log("results", results);
-    } catch (error) {
-      console.log("error fetching", error);
-    }
-  };
-
   return (
     <div className="App">
       <h1>Sign Up</h1>
+      <Form noValidate validated={validated} onSubmit={signUp}>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3" controlId="formBasicUserName">
+              <Form.Label>User name</Form.Label>
+              <Form.Control
+                required
+                name="userName"
+                value={newUser.userName ? newUser.userName : ""}
+                type="text"
+                placeholder="User name"
+                onChange={handleChangeHandler}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please pick a user name.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3" controlId="formBasicName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                name="name"
+                value={newUser.name ? newUser.name : ""}
+                type="text"
+                placeholder="Name"
+                onChange={handleChangeHandler}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            required
+            name="email"
+            value={newUser.email ? newUser.email : ""}
+            type="email"
+            placeholder="Enter email"
+            onChange={handleChangeHandler}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+          <Form.Control.Feedback type="invalid">
+            Please enter a email adress.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <h2>form:</h2>
-
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            required
+            name="password"
+            value={newUser.password ? newUser.password : ""}
+            type="password"
+            placeholder="Password"
+            onChange={handleChangeHandler}
+          />
+          <Form.Control.Feedback type="invalid">
+            Please coose a password.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label>Profile avatar</Form.Label>
+          <Form.Control type="file" onChange={attachFileHandler} />
+          <Button onClick={submitForm}>Upload picture </Button>
+        </Form.Group>
+        {newUser.avatarPicture && (
+          <img src={newUser.avatarPicture} alt="userPic" />
+        )}
+        <Button variant="primary" type="submit">
+          Signup
+        </Button>
+      </Form>
+      {/* 
       <div className="container">
         <div>
           <label htmlFor="username">Username</label>
@@ -134,7 +165,7 @@ function SignUp() {
           <img src={newUser.avatarPicture} alt="userPic" />
         )}
       </div>
-      <button onClick={signUp}>Signup</button>
+      <button onClick={signUp}>Signup</button>*/}
     </div>
   );
 }

@@ -1,42 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import "./views.css";
 
 function Login() {
-  const [loginUser, setLoginUser] = useState({});
-
+  const { loginUser, setLoginUser, logIn } = useContext(AuthContext);
   const handleChangeHandler = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
 
-  const logIn = async () => {
-    let urlencoded = new URLSearchParams();
-    urlencoded.append("email", loginUser.email);
-    urlencoded.append("password", loginUser.password);
-
-    var requestOptions = {
-      method: "POST",
-      body: urlencoded,
-    };
-
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/login",
-        requestOptions
-      );
-      const result = await response.json();
-      const { token, user } = result;
-
-      if (token) {
-        localStorage.setItem("token", token);
-      } else {
-        console.log("error seting token");
-      }
-      console.log("result", result);
-    } catch (error) {
-      console.log("login error", error);
-    }
-  };
   return (
     <div>
       <h2>Login</h2>
