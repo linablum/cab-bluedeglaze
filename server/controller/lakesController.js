@@ -1,4 +1,5 @@
 import Lake from "../models/lakesModel.js";
+import { v2 as cloudinary } from "cloudinary";
 
 const getAllLakes = async (req, res) => {
   try {
@@ -14,7 +15,7 @@ const getAllLakes = async (req, res) => {
 
 const getLakesByArea = async (req, res) => {
   const { likes } = req.query;
-  // no city with that amount of likes
+  // no lakes with that amount of likes
   if (likes) {
     const lakesByArea = await Lake.find({
       area: req.params.area,

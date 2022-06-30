@@ -1,8 +1,7 @@
 import { useState } from "react";
+import "./AddLake.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 
 function AddLake() {
   const [newLake, setNewLake] = useState({});
@@ -71,42 +70,36 @@ function AddLake() {
   };
 
   return (
-    <div className="containerSignUp">
-      <div className="innerContainerSignUp">
+    <div className="containerLake">
+      <div className="innerContainerLake">
         <h1>Add a lake</h1>
         <Form noValidate>
           {/* validated={validated} */}
-          <Row>
-            <Col>
-              <Form.Group className="mb-3" controlId="formBasicUserName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  required
-                  name="name"
-                  value={newLake.name ? newLake.name : ""}
-                  type="text"
-                  placeholder="name"
-                  onChange={handleChangeHandler}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please insert a name.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Label>Area</Form.Label>
-                <Form.Control
-                  name="name"
-                  value={newLake.area ? newLake.area : ""}
-                  type="text"
-                  placeholder="area"
-                  onChange={handleChangeHandler}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
           <Form.Group className="mb-3" controlId="formBasicUserName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              required
+              name="name"
+              value={newLake.name ? newLake.name : ""}
+              type="text"
+              placeholder="name"
+              onChange={handleChangeHandler}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please insert a name.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicArea">
+            <Form.Label>Area</Form.Label>
+            <Form.Control
+              name="area"
+              value={newLake.area ? newLake.area : ""}
+              type="text"
+              placeholder="area"
+              onChange={handleChangeHandler}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicLocation">
             <Form.Label>User name</Form.Label>
             <Form.Control
               required
@@ -120,13 +113,13 @@ function AddLake() {
               Please insert a name.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="formBasicDescription">
             <Form.Label>Short Description</Form.Label>
             <Form.Control
               required
-              name="shortDescriptiont"
+              name="shortDescription"
               value={newLake.shortDescription ? newLake.shortDescription : ""}
-              type="textarea"
+              type="text"
               placeholder="Short Description"
               onChange={handleChangeHandler}
             />
@@ -141,13 +134,15 @@ function AddLake() {
               Upload picture
             </Button>
           </Form.Group>
-          {newLake.lakePicture && (
-            <img src={newLake.lakePicture} alt="lakePicture" />
-          )}
           <Button className="signButton" onClick={addLake}>
             Signup
           </Button>
         </Form>
+      </div>
+      <div>
+        {newLake.lakePicture && (
+          <img src={newLake.lakePicture} alt="lakePicture" />
+        )}
       </div>
     </div>
   );
