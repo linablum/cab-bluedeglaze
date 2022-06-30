@@ -57,7 +57,7 @@ function Login() {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Button className="signButton" onClick={handleSubmit}>
+          <Button className="signButton" onClick={logIn}>
             Login
           </Button>
         </Form>

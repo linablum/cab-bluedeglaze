@@ -31,33 +31,6 @@ function Profile() {
       console.log("error gettin profile", error);
       setError("login first");
     }
-
-    /* const submitHandler = async (e) => {
-      e.preventDefault();
-      const updateUserWithPic = {
-        userId: loggedUser._id,
-      };
-      if (file) {
-        const data = new FormData();
-        const fileName = Date.now() + file.name;
-        data.append("name", fileName); // REVIEW if order would be 1st ("file", file), it wont worl in server.js with body.req.name , but with file.originalname
-        data.append("file", file);
-        updateUserWithPic.coverPicture = fileName;
-        try {
-          await axios2.post("/upload", data);
-          console.log(`picture uploaded to Server`, data);
-        } catch (err) {
-          console.log(`ERROR uploading file`, err.message);
-        }
-      }
-      try {
-        await axios2.put("/users/" + userId, updateUserWithPic);
-        window.location.reload(); // REVIEW cheap trick to refresh after uploading. Later create a post context and update post state
-        console.log(`user updated with Picture`, updateUserWithPic);
-      } catch (err) {
-        console.log("error", err.message);
-      }
-    }; */
   };
   return (
     <div>

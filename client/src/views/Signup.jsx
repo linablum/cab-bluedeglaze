@@ -15,11 +15,27 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     const form = e.currentTarget;
+    console.log(form);
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
+      setValidated(false);
     }
-    setValidated(true);
+    if (form.checkValidity() === true) {
+      setValidated(true);
+
+      sign();
+    }
+  };
+  const sign = () => {
+    if (validated === true) {
+      // setValidated(true);
+
+      // e.preventDefault();
+      // signUp();
+      console.log("user signed up");
+    }
+    // console.log("sign");
   };
 
   const handleChangeHandler = (e) => {
@@ -34,7 +50,7 @@ function SignUp() {
     <div className="containerSignUp">
       <div className="innerContainerSignUp">
         <h1>Sign Up</h1>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form noValidate validated={validated}>
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicUserName">
@@ -107,7 +123,7 @@ function SignUp() {
           {newUser.avatarPicture && (
             <img src={newUser.avatarPicture} alt="userPic" />
           )}
-          <Button className="signButton" type="submit">
+          <Button className="signButton" onClick={handleSubmit}>
             Signup
           </Button>
         </Form>
