@@ -8,6 +8,7 @@ import Signup from "./views/Signup";
 import Profile from "./views/Profile";
 import Lakes from "./views/Lakes";
 import Home from "./views/Home";
+import AddLake from "./components/AddLake/AddLake";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/chat" />
+          <Route path="/newlake" element={<AddLake />} />
         </Routes>
       </AuthContextProvider>
     </div>

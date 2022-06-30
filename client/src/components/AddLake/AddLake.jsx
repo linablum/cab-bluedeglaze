@@ -1,11 +1,40 @@
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 function AddLake() {
   const [newLake, setNewLake] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
+  //const [validated, setValidated] = useState(false);
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    console.log("formData", formData);
+
+    const requestOptions = {
+      method: "POST",
+      body: formData,
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/lakes/imageUpload",
+        requestOptions
+      );
+      const result = await response.json();
+      setNewLake({ ...newLake, lakePicture: result.imageUrL }); // imageURL is how the field is defined in usersController.
+      console.log(newLake);
+    } catch (error) {
+      console.log('"error submiting picture"', error);
+    }
+  };
 
   const addLake = async () => {
     //verify all necessary fields are filled
-    // verify email / password length and strength with Regex
+    //verify length
     let urlencoded = new URLSearchParams();
     urlencoded.append("name", newLake.name);
     urlencoded.append("area", newLake.area);
@@ -32,6 +61,96 @@ function AddLake() {
       console.log("error fetching", error);
     }
   };
+
+  const handleChangeHandler = (e) => {
+    setNewLake({ ...newLake, [e.target.name]: e.target.value });
+  };
+
+  const attachFileHandler = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  return (
+    <div className="containerSignUp">
+      <div className="innerContainerSignUp">
+        <h1>Add a lake</h1>
+        <Form noValidate>
+          {/* validated={validated} */}
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicUserName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  required
+                  name="name"
+                  value={newLake.name ? newLake.name : ""}
+                  type="text"
+                  placeholder="name"
+                  onChange={handleChangeHandler}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please insert a name.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Area</Form.Label>
+                <Form.Control
+                  name="name"
+                  value={newLake.area ? newLake.area : ""}
+                  type="text"
+                  placeholder="area"
+                  onChange={handleChangeHandler}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Form.Group className="mb-3" controlId="formBasicUserName">
+            <Form.Label>User name</Form.Label>
+            <Form.Control
+              required
+              name="location"
+              value={newLake.location ? newLake.location : ""}
+              type="text"
+              placeholder="location"
+              onChange={handleChangeHandler}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please insert a name.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Short Description</Form.Label>
+            <Form.Control
+              required
+              name="shortDescriptiont"
+              value={newLake.shortDescription ? newLake.shortDescription : ""}
+              type="textarea"
+              placeholder="Short Description"
+              onChange={handleChangeHandler}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please write something about that lake.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Lake Image</Form.Label>
+            <Form.Control type="file" onChange={attachFileHandler} />
+            <Button className="signButton" onClick={submitForm}>
+              Upload picture
+            </Button>
+          </Form.Group>
+          {newLake.lakePicture && (
+            <img src={newLake.lakePicture} alt="lakePicture" />
+          )}
+          <Button className="signButton" onClick={addLake}>
+            Signup
+          </Button>
+        </Form>
+      </div>
+    </div>
+  );
 }
 
 export default AddLake;

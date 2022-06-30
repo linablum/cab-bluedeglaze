@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+/* import { useState, createContext } from "react";
 
 export const LakeContext = createContext();
 
@@ -29,4 +29,4 @@ export const LakeContextProvider = (props) => {
       {props.children}
     </LakesContext.Provider>
   );
-};
+}; */
