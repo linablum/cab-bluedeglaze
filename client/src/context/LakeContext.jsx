@@ -2,7 +2,7 @@ import { useState, createContext } from "react";
 
 export const LakeContext = createContext();
 
-export const PlantsContextProvider = (props) => {
+export const LakeContextProvider = (props) => {
   //  const [details, setDetails] = useState();
   //  const [loading, setLoading] = useState();
 

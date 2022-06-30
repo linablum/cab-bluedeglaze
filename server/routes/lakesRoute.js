@@ -3,7 +3,7 @@ import { getAllLakes, getLakesByArea } from "../controller/lakesController.js";
 
 const router = express.Router();
 
-router.get("/lakes", getAllLakes);
+router.get("/all", getAllLakes);
 router.get("/:area", getLakesByArea);
 
 export default router;
