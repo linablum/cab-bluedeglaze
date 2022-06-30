@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 
 function Lakes() {
   const [lakes, setLakes] = useState([]);
@@ -19,7 +20,7 @@ function Lakes() {
   }, []);
 
   return (
-    <div>
+    <div className="lakeContainer">
       <Row xs={1} md={2} className="g-4">
         {lakes &&
           lakes.map((lake) => {
@@ -48,6 +49,9 @@ function Lakes() {
             );
           })}
       </Row>
+      <div>
+        <Button className="signButton">Add Lake</Button>
+      </div>
     </div>
   );
 }

@@ -34,7 +34,6 @@ const lakeDetailSchema = new Schema({
     comment: String,
     date: Date,
   },
-  //  image:
 });
 
 const LakeDetail = mongoose.model("LakeDetail", lakeDetailSchema);

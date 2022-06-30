@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const lakeSchema = new Schema({
-  // _id: Schema.Types.ObjectId,
   name: {
     type: String,
     required: true,
@@ -10,10 +9,12 @@ const lakeSchema = new Schema({
   },
   area: String,
   location: String,
+  lakePicture: String,
+  shortDescription: String,
   author: { type: Schema.Types.ObjectId, ref: "User" },
   meta: {
-    bookmark: Number,
-    likes: Number,
+    bookmark: { type: Number, default: 0 },
+    likes: { type: Number, default: 0 },
   },
 });
 

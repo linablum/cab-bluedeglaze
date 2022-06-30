@@ -10,7 +10,7 @@ export const AuthContextProvider = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [newUser, setNewUser] = useState({});
   const [loginUser, setLoginUser] = useState({});
-  const redirectTo = useNavigate();
+  //const redirectTo = useNavigate();
 
   const submitForm = async (e) => {
     e.preventDefault();

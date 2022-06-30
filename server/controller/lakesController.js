@@ -42,4 +42,62 @@ const getLakesByArea = async (req, res) => {
   }
 };
 
-export { getAllLakes, getLakesByArea };
+const uploadLakePicture = async (req, res) => {
+  console.log("req.body", req.body);
+  try {
+    console.log("req.file", req.file);
+    const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+      folder: "bluedeglaze-lakes",
+    });
+    console.log("result", uploadResult);
+    res.status(200).json({
+      message: "Image succesfully uploaded.",
+      imageUrL: uploadResult.url,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Image couldn't be uploaded.", error: error });
+  }
+};
+
+const addNewLake = async (req, res) => {
+  try {
+    console.log(req.body);
+    const existingUser = await Lake.findOne({ name: req.body.name });
+    if (existingUser) {
+      res.status(409).json({ message: "Lake already exists!" });
+    } else {
+      const NewLake = new Lake({
+        name: req.body.name,
+        area: req.body.area,
+        location: req.body.location,
+        shortDescription: req.body.shortDescription,
+        lakePicture: req.body.lakePicture,
+      });
+      try {
+        const savedLake = await NewLake.save();
+        res.status(201).json({
+          lake: {
+            name: savedLake.name,
+            area: savedLake.area,
+            location: savedLake.location,
+            shortDescription: savedLake.shortDescription,
+            lakePicture: savedLake.lakePicture,
+          },
+          message: "Lake added",
+        });
+      } catch (error) {
+        res
+          .status(409)
+          .json({ message: "Error while saving new lake.", error: error });
+      }
+    }
+  } catch (error) {
+    res
+      .status(401)
+      .json({ message: "Adding a lake not possible.", error: error });
+  }
+};
+
+export { getAllLakes, getLakesByArea, addNewLake, uploadLakePicture };
