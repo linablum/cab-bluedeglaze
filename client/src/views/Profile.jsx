@@ -62,8 +62,8 @@ function Profile() {
   return (
     <div>
       <h2> Profile</h2>
-      <button onClick={getProfile} style={{ backgroundColor: "lightblue" }}>
-        get Profile
+      <button className="signButton" onClick={getProfile}>
+        Get Profile
       </button>
       {userProfile && (
         <div>

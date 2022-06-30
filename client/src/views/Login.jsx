@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import "./Login.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "./views.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function Login() {
   const { loginUser, setLoginUser, logIn } = useContext(AuthContext);
@@ -9,10 +11,58 @@ function Login() {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
 
-  return (
-    <div>
-      <h2>Login</h2>
+  const [validated, setValidated] = useState(false);
 
+  const handleSubmit = (e) => {
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setValidated(true);
+  };
+
+  return (
+    <div className="containerLogIn">
+      <div className="innerContainerLogIn">
+        <h2>Login</h2>
+        <Form noValidate validated={validated}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              required
+              name="email"
+              value={loginUser.email ? loginUser.email : ""}
+              type="email"
+              placeholder="Enter email"
+              onChange={handleChangeHandler}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please enter a valid email adress.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              name="password"
+              value={loginUser.password ? loginUser.password : ""}
+              type="password"
+              placeholder="Password"
+              onChange={handleChangeHandler}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please enter password.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Button className="signButton" onClick={handleSubmit}>
+            Login
+          </Button>
+        </Form>
+
+        {/* 
       <div className="container">
         <div>
           <label htmlFor="email">Email</label>
@@ -35,7 +85,8 @@ function Login() {
           />
         </div>
       </div>
-      <button onClick={logIn}>Login</button>
+      <button onClick={logIn}>Login</button>*/}
+      </div>
     </div>
   );
 }

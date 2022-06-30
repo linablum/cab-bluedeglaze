@@ -9,7 +9,17 @@ input[type="password"] {
   height: 50px;
 }
  */
-button {
+.containerSignUp {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.innerContainerSignUp {
+}
+
+.signButton {
   display: inline-block;
   padding: 12px 40px;
   background-color: #09a0a2;
@@ -28,7 +38,8 @@ button {
   font-size: 15px;
 }
 
-button:hover {
+.signButton:hover {
+  background-color: #09a0a2;
   -webkit-transform: translateY(-7px);
   transform: translateY(-7px);
 }

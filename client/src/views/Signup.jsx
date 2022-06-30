@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import "./Signup.css";
 import { AuthContext } from "../context/AuthContext";
@@ -31,84 +31,87 @@ function SignUp() {
   };
 
   return (
-    <div className="App">
-      <h1>Sign Up</h1>
-      <Form noValidate validated={validated} onSubmit={signUp}>
-        <Row>
-          <Col>
-            <Form.Group className="mb-3" controlId="formBasicUserName">
-              <Form.Label>User name</Form.Label>
-              <Form.Control
-                required
-                name="userName"
-                value={newUser.userName ? newUser.userName : ""}
-                type="text"
-                placeholder="User name"
-                onChange={handleChangeHandler}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please pick a user name.
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                name="name"
-                value={newUser.name ? newUser.name : ""}
-                type="text"
-                placeholder="Name"
-                onChange={handleChangeHandler}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            required
-            name="email"
-            value={newUser.email ? newUser.email : ""}
-            type="email"
-            placeholder="Enter email"
-            onChange={handleChangeHandler}
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-          <Form.Control.Feedback type="invalid">
-            Please enter a email adress.
-          </Form.Control.Feedback>
-        </Form.Group>
+    <div className="containerSignUp">
+      <div className="innerContainerSignUp">
+        <h1>Sign Up</h1>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicUserName">
+                <Form.Label>User name</Form.Label>
+                <Form.Control
+                  required
+                  name="userName"
+                  value={newUser.userName ? newUser.userName : ""}
+                  type="text"
+                  placeholder="User name"
+                  onChange={handleChangeHandler}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please pick a user name.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  name="name"
+                  value={newUser.name ? newUser.name : ""}
+                  type="text"
+                  placeholder="Name"
+                  onChange={handleChangeHandler}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              required
+              name="email"
+              value={newUser.email ? newUser.email : ""}
+              type="email"
+              placeholder="Enter email"
+              onChange={handleChangeHandler}
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+            <Form.Control.Feedback type="invalid">
+              Please enter a valid email adress.
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            required
-            name="password"
-            value={newUser.password ? newUser.password : ""}
-            type="password"
-            placeholder="Password"
-            onChange={handleChangeHandler}
-          />
-          <Form.Control.Feedback type="invalid">
-            Please coose a password.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Profile avatar</Form.Label>
-          <Form.Control type="file" onChange={attachFileHandler} />
-          <Button onClick={submitForm}>Upload picture </Button>
-        </Form.Group>
-        {newUser.avatarPicture && (
-          <img src={newUser.avatarPicture} alt="userPic" />
-        )}
-        <Button variant="primary" type="submit">
-          Signup
-        </Button>
-      </Form>
-      {/* 
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              name="password"
+              value={newUser.password ? newUser.password : ""}
+              type="password"
+              placeholder="Password"
+              onChange={handleChangeHandler}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please coose a password.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Profile avatar</Form.Label>
+            <Form.Control type="file" onChange={attachFileHandler} />
+            <Button className="signButton" onClick={submitForm}>
+              Upload picture
+            </Button>
+          </Form.Group>
+          {newUser.avatarPicture && (
+            <img src={newUser.avatarPicture} alt="userPic" />
+          )}
+          <Button className="signButton" type="submit">
+            Signup
+          </Button>
+        </Form>
+        {/* 
       <div className="container">
         <div>
           <label htmlFor="username">Username</label>
@@ -166,6 +169,7 @@ function SignUp() {
         )}
       </div>
       <button onClick={signUp}>Signup</button>*/}
+      </div>
     </div>
   );
 }
