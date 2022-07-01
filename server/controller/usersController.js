@@ -121,14 +121,15 @@ const updateProfile = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       avatarPicture: req.body.avatarPicture,
-    },
-    function (err, docs) {
-      if (err) res.json(err);
-      else {
-        console.log(docs);
-      }
     }
   );
+  res.status(200).json({
+    msg: "account updated",
+    userName: req.user.userName,
+    email: req.user.email,
+    name: req.user.name,
+    avatar: req.user.avatarPicture,
+  });
 };
 
 export {
