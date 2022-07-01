@@ -108,10 +108,34 @@ const getProfile = (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const user = await User.deleteOne({ email: req.user.email });
+  const deleteUser = await User.deleteOne({ email: req.user.email });
   res.status(200).json({
-    msg: "user deleted",
+    msg: "account deleted",
   });
 };
 
-export { uploadUserPicture, signUp, logIn, getProfile, deleteUser };
+const updateProfile = async (req, res) => {
+  const updateUser = await User.updateOne(
+    { email: req.user.email },
+    {
+      name: req.body.name,
+      email: req.body.email,
+      avatarPicture: req.body.avatarPicture,
+    },
+    function (err, docs) {
+      if (err) res.json(err);
+      else {
+        console.log(docs);
+      }
+    }
+  );
+};
+
+export {
+  uploadUserPicture,
+  signUp,
+  logIn,
+  getProfile,
+  deleteUser,
+  updateProfile,
+};

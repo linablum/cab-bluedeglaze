@@ -123,7 +123,7 @@ function SignUp() {
           {newUser.avatarPicture && (
             <img src={newUser.avatarPicture} alt="userPic" />
           )}
-          <Button className="signButton" onClick={handleSubmit}>
+          <Button className="signButton" onClick={signUp}>
             Signup
           </Button>
         </Form>
