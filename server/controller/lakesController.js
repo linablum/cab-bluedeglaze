@@ -101,4 +101,6 @@ const addNewLake = async (req, res) => {
   }
 };
 
-export { getAllLakes, getLakesByArea, addNewLake, uploadLakePicture };
+const editLake = async () => {};
+
+export { getAllLakes, getLakesByArea, addNewLake, uploadLakePicture, editLake };

@@ -32,6 +32,27 @@ function Profile() {
       setError("login first");
     }
   };
+
+  const deleteProfile = async () => {
+    const token = getToken();
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/users/delete",
+        requestOptions
+      );
+      const result = await response.json();
+      console.log("result", result);
+    } catch (error) {
+      console.log("error gettin profile", error);
+      setError("login first");
+    }
+  };
   return (
     <div>
       <h2> Profile</h2>

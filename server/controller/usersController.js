@@ -107,4 +107,11 @@ const getProfile = (req, res) => {
   });
 };
 
-export { uploadUserPicture, signUp, logIn, getProfile };
+const deleteUser = async (req, res) => {
+  const user = await User.deleteOne({ email: req.user.email });
+  res.status(200).json({
+    msg: "user deleted",
+  });
+};
+
+export { uploadUserPicture, signUp, logIn, getProfile, deleteUser };
