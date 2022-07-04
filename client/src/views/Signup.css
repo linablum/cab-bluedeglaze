@@ -48,9 +48,7 @@ input[type="password"] {
 .signButton:focus,
 .signButton:active:focus {
   background-color: #09a0a2;
-  border-color: #72c5c7;
-  -webkit-transform: translateY(-7px);
-  transform: translateY(-7px);
+  box-shadow: 0 0 0 0.3rem #a5e1e2;
 }
 
 .btnFile input {

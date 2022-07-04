@@ -72,78 +72,80 @@ function AddLake() {
 
   return (
     <div className="containerLake">
+      <h1>Add a lake</h1>
       <div className="innerContainerLake">
-        <h1>Add a lake</h1>
-        <Form noValidate>
-          {/* validated={validated} */}
-          <Form.Group className="mb-3" controlId="formBasicUserName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              required
-              name="name"
-              value={newLake.name ? newLake.name : ""}
-              type="text"
-              onChange={handleChangeHandler}
-            />
-            <Form.Control.Feedback type="invalid">
-              Please insert a name.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicArea">
-            <Form.Label>Area</Form.Label>
-            <Form.Control
-              name="area"
-              value={newLake.area ? newLake.area : ""}
-              type="text"
-              onChange={handleChangeHandler}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicLocation">
-            <Form.Label>User name</Form.Label>
-            <Form.Control
-              required
-              name="location"
-              value={newLake.location ? newLake.location : ""}
-              type="text"
-              onChange={handleChangeHandler}
-            />
-            <Form.Control.Feedback type="invalid">
-              Please insert a name.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicDescription">
-            <Form.Label>Short Description</Form.Label>
-            <Form.Control
-              required
-              name="shortDescription"
-              value={newLake.shortDescription ? newLake.shortDescription : ""}
-              type="text"
-              onChange={handleChangeHandler}
-            />
-            <Form.Control.Feedback type="invalid">
-              Please write something about that lake.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Lake Image</Form.Label>
-            <Form.Control type="file" onChange={attachFileHandler} />
-            <Button className="signButton" onClick={submitForm}>
-              Upload picture
+        <div>
+          <Form noValidate>
+            {/* validated={validated} */}
+            <Form.Group className="mb-3" controlId="formBasicUserName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                required
+                name="name"
+                value={newLake.name ? newLake.name : ""}
+                type="text"
+                onChange={handleChangeHandler}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please insert a name.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicArea">
+              <Form.Label>Area</Form.Label>
+              <Form.Control
+                name="area"
+                value={newLake.area ? newLake.area : ""}
+                type="text"
+                onChange={handleChangeHandler}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicLocation">
+              <Form.Label>Location</Form.Label>
+              <Form.Control
+                required
+                name="location"
+                value={newLake.location ? newLake.location : ""}
+                type="text"
+                onChange={handleChangeHandler}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please insert a name.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicDescription">
+              <Form.Label>Short Description</Form.Label>
+              <Form.Control
+                required
+                name="shortDescription"
+                value={newLake.shortDescription ? newLake.shortDescription : ""}
+                type="text"
+                onChange={handleChangeHandler}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please write something about that lake.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Lake Image</Form.Label>
+              <Form.Control type="file" onChange={attachFileHandler} />
+              <Button className="signButton" onClick={submitForm}>
+                Upload picture
+              </Button>
+            </Form.Group>
+            <Button className="signButton" onClick={addLake}>
+              Submit Lake
             </Button>
-          </Form.Group>
-          <Button className="signButton" onClick={addLake}>
-            Submit Lake
-          </Button>
-        </Form>
-      </div>
-      <div>
-        {newLake.lakePicture && (
-          <img
-            src={newLake.lakePicture}
-            className="lakeImage"
-            alt="lakePicture"
-          />
-        )}
+          </Form>
+        </div>
+        <div className="lakeImageContainer">
+          {newLake.lakePicture && (
+            <img
+              src={newLake.lakePicture}
+              className="lakeImage"
+              alt="lakePicture"
+            />
+          )}
+        </div>
       </div>
     </div>
   );
