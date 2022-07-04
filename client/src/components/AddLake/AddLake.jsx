@@ -43,6 +43,7 @@ function AddLake() {
       "lakePicture",
       newLake.lakePicture ? newLake.lakePicture : ""
     );
+    // urlencoded.append("author", );
 
     var requestOptions = {
       method: "POST",
@@ -82,7 +83,6 @@ function AddLake() {
               name="name"
               value={newLake.name ? newLake.name : ""}
               type="text"
-              placeholder="name"
               onChange={handleChangeHandler}
             />
             <Form.Control.Feedback type="invalid">
@@ -95,7 +95,6 @@ function AddLake() {
               name="area"
               value={newLake.area ? newLake.area : ""}
               type="text"
-              placeholder="area"
               onChange={handleChangeHandler}
             />
           </Form.Group>
@@ -106,7 +105,6 @@ function AddLake() {
               name="location"
               value={newLake.location ? newLake.location : ""}
               type="text"
-              placeholder="location"
               onChange={handleChangeHandler}
             />
             <Form.Control.Feedback type="invalid">
@@ -120,7 +118,6 @@ function AddLake() {
               name="shortDescription"
               value={newLake.shortDescription ? newLake.shortDescription : ""}
               type="text"
-              placeholder="Short Description"
               onChange={handleChangeHandler}
             />
             <Form.Control.Feedback type="invalid">
@@ -135,13 +132,17 @@ function AddLake() {
             </Button>
           </Form.Group>
           <Button className="signButton" onClick={addLake}>
-            Signup
+            Submit Lake
           </Button>
         </Form>
       </div>
       <div>
         {newLake.lakePicture && (
-          <img src={newLake.lakePicture} alt="lakePicture" />
+          <img
+            src={newLake.lakePicture}
+            className="lakeImage"
+            alt="lakePicture"
+          />
         )}
       </div>
     </div>

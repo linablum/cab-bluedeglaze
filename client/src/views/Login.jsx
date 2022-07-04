@@ -34,7 +34,6 @@ function Login() {
               name="email"
               value={loginUser.email ? loginUser.email : ""}
               type="email"
-              placeholder="Enter email"
               onChange={handleChangeHandler}
             />
             <Form.Control.Feedback type="invalid">
@@ -49,7 +48,6 @@ function Login() {
               name="password"
               value={loginUser.password ? loginUser.password : ""}
               type="password"
-              placeholder="Password"
               onChange={handleChangeHandler}
             />
             <Form.Control.Feedback type="invalid">

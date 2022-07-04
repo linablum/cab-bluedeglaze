@@ -1,11 +1,13 @@
 import "./Lakes.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import { AuthContext } from "../context/AuthContext";
 
 function Lakes() {
+  const { user } = useContext(AuthContext);
   const [lakes, setLakes] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +29,7 @@ function Lakes() {
             return (
               <>
                 <Col>
-                  <Card>
+                  <Card key={lake.name}>
                     <Card.Img variant="top" src="holder.js/100px160" />
                     <Card.Body>
                       <Card.Title>{lake.name}</Card.Title>
@@ -50,7 +52,13 @@ function Lakes() {
           })}
       </Row>
       <div>
-        <Button className="signButton">Add Lake</Button>
+        {user ? (
+          <Button className="signButton" href="/newlake">
+            Add Lake
+          </Button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

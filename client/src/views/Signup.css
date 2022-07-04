@@ -39,7 +39,16 @@ input[type="password"] {
 }
 
 .signButton:hover {
+  background-color: #72c5c7;
+  -webkit-transform: translateY(-7px);
+  transform: translateY(-7px);
+}
+
+.signButton:active,
+.signButton:focus,
+.signButton:active:focus {
   background-color: #09a0a2;
+  border-color: #72c5c7;
   -webkit-transform: translateY(-7px);
   transform: translateY(-7px);
 }

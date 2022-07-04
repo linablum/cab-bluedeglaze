@@ -51,6 +51,7 @@ function Profile() {
       );
       const result = await response.json();
       console.log("result", result);
+      setUserProfile(false);
     } catch (error) {
       console.log("error deleting profile", error);
       setError("deleting not possible");

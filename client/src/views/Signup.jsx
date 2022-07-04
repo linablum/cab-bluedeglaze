@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Signup.css";
 import { AuthContext } from "../context/AuthContext";
 import Form from "react-bootstrap/Form";
@@ -60,7 +59,6 @@ function SignUp() {
                   name="userName"
                   value={newUser.userName ? newUser.userName : ""}
                   type="text"
-                  placeholder="User name"
                   onChange={handleChangeHandler}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -75,7 +73,6 @@ function SignUp() {
                   name="name"
                   value={newUser.name ? newUser.name : ""}
                   type="text"
-                  placeholder="Name"
                   onChange={handleChangeHandler}
                 />
               </Form.Group>
@@ -88,7 +85,6 @@ function SignUp() {
               name="email"
               value={newUser.email ? newUser.email : ""}
               type="email"
-              placeholder="Enter email"
               onChange={handleChangeHandler}
             />
             <Form.Text className="text-muted">
@@ -106,7 +102,6 @@ function SignUp() {
               name="password"
               value={newUser.password ? newUser.password : ""}
               type="password"
-              placeholder="Password"
               onChange={handleChangeHandler}
             />
             <Form.Control.Feedback type="invalid">
