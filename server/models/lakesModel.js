@@ -13,7 +13,7 @@ const lakeSchema = new Schema({
   shortDescription: String,
   author: { type: Schema.Types.ObjectId, ref: "User" },
   meta: {
-    bookmark: { type: Number, default: 0 },
+    bookmarks: { type: Number, default: 0 },
     likes: { type: Number, default: 0 },
   },
 });

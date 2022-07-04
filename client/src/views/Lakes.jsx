@@ -5,10 +5,14 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../context/AuthContext";
+import { SuitHeart } from "react-bootstrap-icons";
+import LakeDetailsModal from "../components/LakeDetailsModal/LakeDetailsModal";
 
 function Lakes() {
   const { user } = useContext(AuthContext);
   const [lakes, setLakes] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("http://localhost:5000/api/lakes/all").catch(
@@ -38,12 +42,27 @@ function Lakes() {
                         natural lead-in to additional content. This content is a
                         little bit longer.
                       </Card.Text>
+                      <Card.Text>
+                        <SuitHeart className="likeIcon" /> {lake.meta.likes}
+                      </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">{lake.area}</small>
+                      <small className="text-muted">
+                        {lake.area} {lake.location}
+                      </small>
                     </Card.Footer>
                     <Card.Footer>
-                      <small className="text-muted">{lake.location}</small>
+                      {/*                       <small className="text-muted">More Details</small> */}
+                      <Button
+                        className="signButton"
+                        onClick={() => setModalShow(true)}
+                      >
+                        More Info
+                      </Button>
+                      <LakeDetailsModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                      />
                     </Card.Footer>
                   </Card>
                 </Col>

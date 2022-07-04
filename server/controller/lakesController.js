@@ -5,15 +5,27 @@ const getAllLakes = async (req, res) => {
   try {
     const allLakes = await Lake.find({});
     res.status(200).json(allLakes);
-    console.log(allLakes);
   } catch (error) {
     res
       .status(500)
       .json({ error: error, message: "Something went wrong with the server." });
   }
 };
-
 const getLakesByArea = async (req, res) => {
+  try {
+    const lakesByArea = await Lake.find({
+      area: req.params.area,
+    }).exec();
+    res.status(200).json({ lakesByArea, number: lakesByArea.length });
+  } catch (error) {
+    res.status(500).json({
+      error: error,
+      message: "Something went wrong with the server.",
+    });
+  }
+};
+
+/* const getLakesByArea = async (req, res) => {
   const { likes } = req.query;
   // no lakes with that amount of likes
   if (likes) {
@@ -41,7 +53,7 @@ const getLakesByArea = async (req, res) => {
       });
     }
   }
-};
+}; */
 
 const uploadLakePicture = async (req, res) => {
   console.log("req.body", req.body);

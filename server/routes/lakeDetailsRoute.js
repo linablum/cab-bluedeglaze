@@ -1,8 +1,12 @@
 import express from "express";
-import { getAllLakeDetails } from "../controller/lakeDetailsController.js";
+import {
+  getAllLakeDetails,
+  getLakesById,
+} from "../controller/lakeDetailsController.js";
 
 const router = express.Router();
 
 router.get("/all", getAllLakeDetails);
+router.get("/:id", getLakesById);
 
 export default router;

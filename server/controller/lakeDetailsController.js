@@ -12,4 +12,13 @@ const getAllLakeDetails = async (req, res) => {
   }
 };
 
-export { getAllLakeDetails };
+const getLakesById = async (req, res) => {
+  try {
+  } catch {
+    res
+      .status(500)
+      .json({ error: error, message: "Something went wrong with the server." });
+  }
+};
+
+export { getAllLakeDetails, getLakesById };
