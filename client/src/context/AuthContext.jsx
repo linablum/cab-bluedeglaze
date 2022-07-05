@@ -10,6 +10,8 @@ export const AuthContextProvider = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [newUser, setNewUser] = useState({});
   const [loginUser, setLoginUser] = useState({});
+  const [userProfile, setUserProfile] = useState(null);
+  const [error, setError] = useState(null);
   //const redirectTo = useNavigate();
 
   const submitForm = async (e) => {
@@ -102,9 +104,11 @@ export const AuthContextProvider = (props) => {
     console.log(token);
     if (token) {
       setUser(true);
+      getProfile();
       console.log("user is logged in");
     } else {
       setUser(false);
+      setError("Please login first");
       console.log("user is NOT logged in");
     }
   };
@@ -112,6 +116,31 @@ export const AuthContextProvider = (props) => {
   useEffect(() => {
     isUserLoggedIn();
   }, [user]);
+
+  const getProfile = async () => {
+    const token = getToken();
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/users/profile",
+        requestOptions
+      );
+      const result = await response.json();
+      console.log("result", result);
+      setUserProfile({
+        email: result.email,
+        userName: result.userName,
+        avatarPicture: result.avatar,
+      });
+    } catch (error) {
+      console.log("error getting profile", error);
+    }
+  };
 
   const logOut = () => {
     localStorage.removeItem("token");
@@ -133,6 +162,10 @@ export const AuthContextProvider = (props) => {
         submitForm,
         logIn,
         logOut,
+        userProfile,
+        setUserProfile,
+        setError,
+        error,
       }}
     >
       {props.children}

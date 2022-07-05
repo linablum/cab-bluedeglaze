@@ -1,18 +1,14 @@
-/* import { useState } from "react";
+const handleSubmit = (e, func, state) => {
+  const form = e.currentTarget;
+  if (form.checkValidity() === false) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  state();
+  if (form.checkValidity() === true) {
+    e.preventDefault();
+    func();
+  }
+};
 
-function HandleSubmit() {
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setValidated(true);
-  };
-  return validated;
-}
-
-export default HandleSubmit;
- */
+export { handleSubmit };

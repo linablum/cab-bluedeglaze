@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import "./Signup.css";
+import { handleSubmit } from "../utils/validateForm";
 import { AuthContext } from "../context/AuthContext";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -12,29 +13,20 @@ function SignUp() {
 
   const [validated, setValidated] = useState(false);
 
+  //handleSubmit(e, signUp, setValidated(true));
+
   const handleSubmit = (e) => {
     const form = e.currentTarget;
     console.log(form);
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
-      setValidated(false);
     }
+    setValidated(true);
     if (form.checkValidity() === true) {
-      setValidated(true);
-
-      sign();
+      e.preventDefault();
+      signUp();
     }
-  };
-  const sign = () => {
-    if (validated === true) {
-      // setValidated(true);
-
-      // e.preventDefault();
-      // signUp();
-      console.log("user signed up");
-    }
-    // console.log("sign");
   };
 
   const handleChangeHandler = (e) => {
@@ -49,7 +41,7 @@ function SignUp() {
     <div className="containerSignUp">
       <div className="innerContainerSignUp">
         <h1>Sign Up</h1>
-        <Form noValidate validated={validated}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicUserName">
@@ -118,7 +110,7 @@ function SignUp() {
           {newUser.avatarPicture && (
             <img src={newUser.avatarPicture} alt="userPic" />
           )}
-          <Button className="signButton" onClick={signUp}>
+          <Button type="submit" className="signButton">
             Signup
           </Button>
         </Form>

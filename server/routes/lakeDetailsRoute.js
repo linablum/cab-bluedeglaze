@@ -1,12 +1,12 @@
 import express from "express";
 import {
   getAllLakeDetails,
-  getLakesById,
+  getLakeById,
 } from "../controller/lakeDetailsController.js";
 
 const router = express.Router();
 
 router.get("/all", getAllLakeDetails);
-router.get("/:id", getLakesById);
+router.get("/:id", getLakeById);
 
 export default router;

@@ -1,40 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { getToken } from "../utils/getToken.js";
 import "./views.css";
 
 function Profile() {
-  const [userProfile, setUserProfile] = useState(null);
-  const [error, setError] = useState(null);
-
-  const getProfile = async () => {
-    const token = getToken();
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-    };
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/profile",
-        requestOptions
-      );
-      const result = await response.json();
-      console.log("result", result);
-      setUserProfile({
-        email: result.email,
-        userName: result.userName,
-        avatarPicture: result.avatar,
-      });
-    } catch (error) {
-      console.log("error getting profile", error);
-      setError("Please login first");
-    }
-  };
-
-  useEffect(() => {
-    getProfile();
-  }, []);
+  const { userProfile, setUserProfile, error, setError } =
+    useContext(AuthContext);
 
   const deleteProfile = async () => {
     const token = getToken();

@@ -57,7 +57,7 @@ function Lakes() {
                         className="signButton"
                         onClick={() => setModalShow(true)}
                       >
-                        More Info
+                        More
                       </Button>
                       <LakeDetailsModal
                         show={modalShow}

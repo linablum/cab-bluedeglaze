@@ -20,13 +20,17 @@ function Login() {
       e.stopPropagation();
     }
     setValidated(true);
+    if (form.checkValidity() === true) {
+      e.preventDefault();
+      logIn();
+    }
   };
 
   return (
     <div className="containerLogIn">
       <div className="innerContainerLogIn">
         <h2>Login</h2>
-        <Form noValidate validated={validated}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -55,7 +59,7 @@ function Login() {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Button className="signButton" onClick={logIn}>
+          <Button className="signButton" type="submit">
             Login
           </Button>
         </Form>

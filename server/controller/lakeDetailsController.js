@@ -1,4 +1,5 @@
 import LakeDetail from "../models/lakesDetailsModel.js";
+import Lake from "../models/lakesModel.js";
 
 const getAllLakeDetails = async (req, res) => {
   try {
@@ -12,13 +13,16 @@ const getAllLakeDetails = async (req, res) => {
   }
 };
 
-const getLakesById = async (req, res) => {
+const getLakeById = async (req, res) => {
   try {
-  } catch {
-    res
-      .status(500)
-      .json({ error: error, message: "Something went wrong with the server." });
+    const lakeById = await Lake.find({ _id: req.params.id }).exec();
+    res.status(200).json({ lakeById, number: lakeById.length });
+  } catch (error) {
+    res.status(500).json({
+      error: error,
+      message: "Something went wrong with the server.",
+    });
   }
 };
 
-export { getAllLakeDetails, getLakesById };
+export { getAllLakeDetails, getLakeById };
