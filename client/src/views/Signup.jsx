@@ -6,28 +6,35 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import ValidateComponent from "../utils/ValidateComponent";
 
 function SignUp() {
-  const { newUser, setNewUser, setSelectedFile, signUp, submitForm } =
-    useContext(AuthContext);
+  const {
+    newUser,
+    setNewUser,
+    setSelectedFile,
+    signUp,
+    submitForm,
+    resultSign,
+  } = useContext(AuthContext);
 
   const [validated, setValidated] = useState(false);
 
   //handleSubmit(e, signUp, setValidated(true));
 
-  const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    console.log(form);
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setValidated(true);
-    if (form.checkValidity() === true) {
-      e.preventDefault();
-      signUp();
-    }
-  };
+  // const handleSubmit = (e) => {
+  //   const form = e.currentTarget;
+  //   console.log(form);
+  //   if (form.checkValidity() === false) {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //   }
+  //   setValidated(true);
+  //   if (form.checkValidity() === true) {
+  //     e.preventDefault();
+  //     signUp();
+  //   }
+  // };
 
   const handleChangeHandler = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
@@ -41,11 +48,17 @@ function SignUp() {
     <div className="containerSignUp">
       <div className="innerContainerSignUp">
         <h1>Sign Up</h1>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form
+          noValidate
+          validated={validated}
+          onSubmit={(e) => {
+            <ValidateComponent e={e} />;
+          }}
+        >
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicUserName">
-                <Form.Label>User name</Form.Label>
+                <Form.Label>Username</Form.Label>
                 <Form.Control
                   required
                   name="userName"
@@ -79,14 +92,10 @@ function SignUp() {
               type="email"
               onChange={handleChangeHandler}
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
             <Form.Control.Feedback type="invalid">
               Please enter a valid email adress.
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -94,8 +103,13 @@ function SignUp() {
               name="password"
               value={newUser.password ? newUser.password : ""}
               type="password"
+              pattern="(?=.*\d)(?=.*[A-Z]).{8,}"
               onChange={handleChangeHandler}
             />
+            <Form.Text className="text-muted">
+              At least one number and one uppercase letter, and 8 or more
+              characters.
+            </Form.Text>
             <Form.Control.Feedback type="invalid">
               Please coose a password.
             </Form.Control.Feedback>
@@ -114,64 +128,6 @@ function SignUp() {
             Signup
           </Button>
         </Form>
-        {/* 
-      <div className="container">
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            value={newUser.userName ? newUser.userName : ""}
-            name="userName"
-            onChange={handleChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="username">Name</label>
-          <input
-            id="name"
-            type="text"
-            value={newUser.name ? newUser.name : ""}
-            name="name"
-            onChange={handleChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={newUser.email ? newUser.email : ""}
-            name="email"
-            onChange={handleChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={newUser.password ? newUser.password : ""}
-            name="password"
-            onChange={handleChangeHandler}
-          />
-        </div>
-        <form>
-          <label hmtmlFor="pictureUpload" className="btnFile">
-            Choose file
-            <input
-              type="file"
-              id="pictureUpload"
-              onChange={attachFileHandler}
-            />
-          </label>
-          <button onClick={submitForm}>Upload picture</button>
-        </form>
-        {newUser.avatarPicture && (
-          <img src={newUser.avatarPicture} alt="userPic" />
-        )}
-      </div>
-      <button onClick={signUp}>Signup</button>*/}
       </div>
     </div>
   );
