@@ -3,6 +3,7 @@ import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../utils/getToken";
+import usePicUpload from "../utils/usePicUpload";
 
 export const AuthContext = createContext();
 
@@ -15,13 +16,12 @@ export const AuthContextProvider = (props) => {
   const [error, setError] = useState(null);
   //const redirectTo = useNavigate();
 
-  const submitForm = async (e) => {
+  //const { submitForm } = usePicUpload();
+  /*   const submitForm = async (e) => {
     e.preventDefault();
-    // call  FormData object constructor to populate with pairs of key/values (in this case {image: "our file"} )
     const formData = new FormData();
     formData.append("image", selectedFile);
     console.log("formData", formData);
-    // compose the object with the options to be sent with our request, including the type of method, and use the body of the request to attach data
     const requestOptions = {
       method: "POST",
       body: formData,
@@ -32,8 +32,54 @@ export const AuthContextProvider = (props) => {
         requestOptions
       );
       const result = await response.json();
-      setNewUser({ ...newUser, avatarPicture: result.imageUrL }); // imageURL is how the field is defined in usersController.
+      setNewUser({ ...newUser, avatarPicture: result.imageUrL });
       console.log(newUser);
+    } catch (error) {
+      console.log('"error submiting picture"', error);
+    }
+  };
+ */
+
+  /*   const submitForm = async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+      console.log("formData", formData);
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/api/users/imageUpload",
+          {
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
+        console.log(res.data);
+        setNewUser({ ...newUser, avatarPicture: res.data.imageUrL });
+        console.log(newUser);
+      } catch (error) {
+        console.log('"error submiting picture"', error);
+      }
+    }; */
+
+  const submitForm = async (e) => {
+    try {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+      console.log("formData", formData);
+      await axios
+        .post("http://localhost:5000/api/users/imageUpload", {
+          data: formData,
+        })
+        .then((res) => {
+          const img = res.data;
+          console.log(res.data);
+          console.log(img);
+        })
+        .catch((err) => console.log(err));
+      //  console.log(res.data);
+      // setNewUser({ ...newUser, avatarPicture: res.data.imageUrL });
+      //  console.log(newUser);
     } catch (error) {
       console.log('"error submiting picture"', error);
     }
