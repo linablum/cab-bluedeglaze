@@ -40,59 +40,35 @@ export const AuthContextProvider = (props) => {
   };
 
   const signUp = async () => {
-    let urlencoded = new URLSearchParams();
-    urlencoded.append("userName", newUser.userName);
-    urlencoded.append("name", newUser.name);
-    urlencoded.append("email", newUser.email);
-    urlencoded.append("password", newUser.password);
-    urlencoded.append(
-      "avatarPicture",
-      newUser.avatarPicture
-        ? newUser.avatarPicture
-        : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
-    );
-
-    var requestOptions = {
-      method: "POST",
-      body: urlencoded,
-    };
-
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/signUp",
-        requestOptions
-      );
-      const results = await response.json();
-      console.log("results", results);
+      const res = await axios.post("http://localhost:5000/api/users/signUp", {
+        userName: newUser.userName,
+        name: newUser.name,
+        email: newUser.email,
+        password: newUser.password,
+        avatarPicture: newUser.avatarPicture
+          ? newUser.avatarPicture
+          : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+      });
+      console.log("results", res.data);
     } catch (error) {
       console.log("error fetching", error);
     }
   };
 
   const logIn = async () => {
-    let urlencoded = new URLSearchParams();
-    urlencoded.append("email", loginUser.email);
-    urlencoded.append("password", loginUser.password);
-
-    var requestOptions = {
-      method: "POST",
-      body: urlencoded,
-    };
-
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/login",
-        requestOptions
-      );
-      const result = await response.json();
-      const { token, user } = result;
-
+      const res = await axios.post("http://localhost:5000/api/users/login", {
+        email: loginUser.email,
+        password: loginUser.password,
+      });
+      const { token, user } = res.data;
       if (token) {
         localStorage.setItem("token", token);
       } else {
         console.log("error seting token");
       }
-      console.log("result", result);
+      console.log("result", res.data);
     } catch (error) {
       console.log("login error", error);
     }
@@ -103,7 +79,7 @@ export const AuthContextProvider = (props) => {
     console.log(token);
     if (token) {
       setUser(true);
-      getProfile();
+      getProfile2();
       console.log("user is logged in");
     } else {
       setUser(false);
@@ -118,31 +94,14 @@ export const AuthContextProvider = (props) => {
 
   const getProfile2 = async () => {
     const token = getToken();
-    const response = await axios.get(
-      "http://localhost:5000/api/users/profile",
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  };
-
-  const getProfile = async () => {
-    const token = getToken();
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-    };
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/profile",
-        requestOptions
-      );
-      const result = await response.json();
-      console.log("result", result);
+      const res = await axios.get("http://localhost:5000/api/users/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setUserProfile({
-        email: result.email,
-        userName: result.userName,
-        avatarPicture: result.avatar,
+        email: res.data.email,
+        userName: res.data.userName,
+        avatarPicture: res.data.avatar,
       });
     } catch (error) {
       console.log("error getting profile", error);
