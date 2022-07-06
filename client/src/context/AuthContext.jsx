@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { getToken } from "../utils/getToken";
 
 export const AuthContext = createContext();
@@ -114,6 +115,14 @@ export const AuthContextProvider = (props) => {
   useEffect(() => {
     isUserLoggedIn();
   }, [user]);
+
+  const getProfile2 = async () => {
+    const token = getToken();
+    const response = await axios.get(
+      "http://localhost:5000/api/users/profile",
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  };
 
   const getProfile = async () => {
     const token = getToken();
