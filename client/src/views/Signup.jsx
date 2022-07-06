@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import "./Signup.css";
-import { AuthContext } from "../context/AuthContext";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import "./Signup.css";
 import useHandleSubmit from "../utils/useHandleSubmit";
+import { AuthContext } from "../context/AuthContext";
 
 function SignUp() {
   const { newUser, setNewUser, setSelectedFile, signUp, submitForm } =

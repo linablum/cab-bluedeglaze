@@ -81,7 +81,7 @@ function AddLake() {
             noValidate
             validated={validated}
             onSubmit={(e) => {
-              useHandleSubmit(e, addLake);
+              handleSubmit(e, addLake);
             }}
           >
             <Form.Group className="mb-3" controlId="formBasicUserName">
@@ -100,6 +100,7 @@ function AddLake() {
             <Form.Group className="mb-3" controlId="formBasicArea">
               <Form.Label>Area</Form.Label>
               <Form.Control
+                required
                 name="area"
                 value={newLake.area ? newLake.area : ""}
                 type="text"
@@ -134,7 +135,7 @@ function AddLake() {
             </Form.Group>
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Lake Image</Form.Label>
-              <Form.Control type="file" onChange={attachFileHandler} />
+              <Form.Control required type="file" onChange={attachFileHandler} />
               <Button className="signButton" onClick={submitForm}>
                 Upload picture
               </Button>
