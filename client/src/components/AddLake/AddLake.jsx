@@ -2,11 +2,13 @@ import { useState } from "react";
 import "./AddLake.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import useHandleSubmit from "../../utils/useHandleSubmit";
 
 function AddLake() {
   const [newLake, setNewLake] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
-  //const [validated, setValidated] = useState(false);
+
+  const { handleSubmit, validated } = useHandleSubmit();
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -75,8 +77,13 @@ function AddLake() {
       <h1>Add a lake</h1>
       <div className="innerContainerLake">
         <div>
-          <Form noValidate>
-            {/* validated={validated} */}
+          <Form
+            noValidate
+            validated={validated}
+            onSubmit={(e) => {
+              useHandleSubmit(e, addLake);
+            }}
+          >
             <Form.Group className="mb-3" controlId="formBasicUserName">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -132,7 +139,7 @@ function AddLake() {
                 Upload picture
               </Button>
             </Form.Group>
-            <Button className="signButton" onClick={addLake}>
+            <Button type="submit" className="signButton">
               Submit Lake
             </Button>
           </Form>

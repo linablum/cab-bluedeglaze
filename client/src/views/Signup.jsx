@@ -1,40 +1,17 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import "./Signup.css";
-import { handleSubmit } from "../utils/validateForm";
 import { AuthContext } from "../context/AuthContext";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import ValidateComponent from "../utils/ValidateComponent";
+import useHandleSubmit from "../utils/useHandleSubmit";
 
 function SignUp() {
-  const {
-    newUser,
-    setNewUser,
-    setSelectedFile,
-    signUp,
-    submitForm,
-    resultSign,
-  } = useContext(AuthContext);
+  const { newUser, setNewUser, setSelectedFile, signUp, submitForm } =
+    useContext(AuthContext);
 
-  const [validated, setValidated] = useState(false);
-
-  //handleSubmit(e, signUp, setValidated(true));
-
-  // const handleSubmit = (e) => {
-  //   const form = e.currentTarget;
-  //   console.log(form);
-  //   if (form.checkValidity() === false) {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //   }
-  //   setValidated(true);
-  //   if (form.checkValidity() === true) {
-  //     e.preventDefault();
-  //     signUp();
-  //   }
-  // };
+  const { handleSubmit, validated } = useHandleSubmit();
 
   const handleChangeHandler = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
@@ -52,7 +29,7 @@ function SignUp() {
           noValidate
           validated={validated}
           onSubmit={(e) => {
-            <ValidateComponent e={e} />;
+            handleSubmit(e, signUp);
           }}
         >
           <Row>

@@ -12,7 +12,6 @@ export const AuthContextProvider = (props) => {
   const [loginUser, setLoginUser] = useState({});
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState(null);
-  const [resultSign, setResultSign] = useState(null);
   //const redirectTo = useNavigate();
 
   const submitForm = async (e) => {
@@ -63,8 +62,6 @@ export const AuthContextProvider = (props) => {
         requestOptions
       );
       const results = await response.json();
-      setResultSign(results.message);
-      console.log("sign", resultSign);
       console.log("results", results);
     } catch (error) {
       console.log("error fetching", error);
@@ -167,7 +164,6 @@ export const AuthContextProvider = (props) => {
         setUserProfile,
         setError,
         error,
-        resultSign,
       }}
     >
       {props.children}

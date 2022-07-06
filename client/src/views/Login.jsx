@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import useHandleSubmit from "../utils/useHandleSubmit";
 
 function Login() {
   const { loginUser, setLoginUser, user, logIn } = useContext(AuthContext);
@@ -12,20 +13,7 @@ function Login() {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
 
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setValidated(true);
-    if (form.checkValidity() === true) {
-      e.preventDefault();
-      logIn();
-    }
-  };
+  const { handleSubmit, validated } = useHandleSubmit();
 
   return (
     <div className="containerLogIn">
@@ -34,7 +22,13 @@ function Login() {
         {user ? (
           "You are already logged in"
         ) : (
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form
+            noValidate
+            validated={validated}
+            onSubmit={(e) => {
+              handleSubmit(e, logIn);
+            }}
+          >
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
