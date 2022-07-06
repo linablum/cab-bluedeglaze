@@ -17,7 +17,7 @@ export const AuthContextProvider = (props) => {
   //const redirectTo = useNavigate();
 
   //const { submitForm } = usePicUpload();
-  /*   const submitForm = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", selectedFile);
@@ -38,30 +38,29 @@ export const AuthContextProvider = (props) => {
       console.log('"error submiting picture"', error);
     }
   };
- */
 
   /*   const submitForm = async (e) => {
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append("image", selectedFile);
-      console.log("formData", formData);
-      try {
-        const res = await axios.post(
-          "http://localhost:5000/api/users/imageUpload",
-          {
-            data: formData,
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        );
-        console.log(res.data);
-        setNewUser({ ...newUser, avatarPicture: res.data.imageUrL });
-        console.log(newUser);
-      } catch (error) {
-        console.log('"error submiting picture"', error);
-      }
-    }; */
-
-  const submitForm = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    console.log("formData", formData);
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/users/imageUpload",
+        {
+          data: formData,
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      console.log(res.data);
+      setNewUser({ ...newUser, avatarPicture: res.data.imageUrL });
+      console.log(newUser);
+    } catch (error) {
+      console.log('"error submiting picture"', error);
+    }
+  };
+ */
+  /* const submitForm = async (e) => {
     try {
       e.preventDefault();
       const formData = new FormData();
@@ -85,7 +84,7 @@ export const AuthContextProvider = (props) => {
     }
   };
 
-  const signUp = async () => {
+  */ const signUp = async () => {
     try {
       const res = await axios.post("http://localhost:5000/api/users/signUp", {
         userName: newUser.userName,
@@ -125,7 +124,7 @@ export const AuthContextProvider = (props) => {
     console.log(token);
     if (token) {
       setUser(true);
-      getProfile2();
+      getProfile();
       console.log("user is logged in");
     } else {
       setUser(false);
@@ -138,7 +137,7 @@ export const AuthContextProvider = (props) => {
     isUserLoggedIn();
   }, [user]);
 
-  const getProfile2 = async () => {
+  const getProfile = async () => {
     const token = getToken();
     try {
       const res = await axios.get("http://localhost:5000/api/users/profile", {

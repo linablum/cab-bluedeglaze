@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
+import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { getToken } from "../utils/getToken.js";
 import "./views.css";
 
 function Profile() {
-  const { userProfile, setUserProfile, error, setError } =
+  const { userProfile, setUserProfile, error, setError, logOut } =
     useContext(AuthContext);
 
-  const deleteProfile = async () => {
+  // const updateProfile = async () => {};
+
+  /*   const deleteProfile = async () => {
     const token = getToken();
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -27,7 +30,26 @@ function Profile() {
       console.log("error deleting profile", error);
       setError("deleting not possible");
     }
+  }; */
+
+  const deleteProfile = async () => {
+    const token = getToken();
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/users/delete",
+        null,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setUserProfile(false);
+      logOut();
+    } catch (error) {
+      console.log("error deleting profile", error);
+      setError("deleting not possible");
+    }
   };
+
   return (
     <div>
       <h2>Profile</h2>
