@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import useHandleSubmit from "../utils/useHandleSubmit";
 
 function Login() {
-  const { loginUser, setLoginUser, user, logIn } = useContext(AuthContext);
+  const { loginUser, setLoginUser, user, logIn, msg } = useContext(AuthContext);
 
   const handleChangeHandler = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
@@ -19,6 +19,7 @@ function Login() {
     <div className="containerLogIn">
       <div className="innerContainerLogIn">
         <h2>Login</h2>
+        <div className="msg">{msg}</div>
         {user ? (
           "You are already logged in"
         ) : (

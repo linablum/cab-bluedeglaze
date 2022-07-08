@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import axios from "axios";
 
 function usePicUpload() {
@@ -23,4 +23,4 @@ function usePicUpload() {
   };
   return { submitForm };
 }
-export default usePicUpload;
+export default usePicUpload; */

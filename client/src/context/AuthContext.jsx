@@ -14,8 +14,8 @@ export const AuthContextProvider = (props) => {
   const [loginUser, setLoginUser] = useState({});
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState(null);
-  const [errMsg, setErrMsg] = useState(null);
-  //const redirectTo = useNavigate();
+  const [msg, setMsg] = useState(null);
+  const redirectTo = useNavigate();
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -44,11 +44,12 @@ export const AuthContextProvider = (props) => {
           ? newUser.avatarPicture
           : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
       });
-      console.log("Signup successful");
+      setMsg("Sign up successful, please log in.");
+      redirectTo("../login", { replace: true });
+      console.log("Sign up successful");
     } catch (error) {
       console.log("error fetching", error);
-      setErrMsg(error.response.data.message);
-      console.log(error.response.data.message);
+      setMsg(error.response.data.message);
     }
   };
 
@@ -67,6 +68,8 @@ export const AuthContextProvider = (props) => {
       console.log("result", res.data);
     } catch (error) {
       console.log("login error", error);
+      console.log(error.response.data.msg);
+      setMsg(error.response.data.msg);
     }
   };
 
@@ -128,7 +131,7 @@ export const AuthContextProvider = (props) => {
         setUserProfile,
         setError,
         error,
-        errMsg,
+        msg,
       }}
     >
       {props.children}

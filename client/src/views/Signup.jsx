@@ -8,7 +8,7 @@ import useHandleSubmit from "../utils/useHandleSubmit";
 import { AuthContext } from "../context/AuthContext";
 
 function SignUp() {
-  const { newUser, setNewUser, setSelectedFile, signUp, submitForm, errMsg } =
+  const { newUser, setNewUser, setSelectedFile, signUp, submitForm, msg } =
     useContext(AuthContext);
 
   const { handleSubmit, validated } = useHandleSubmit();
@@ -105,7 +105,7 @@ function SignUp() {
           <Button type="submit" className="signButton">
             Signup
           </Button>
-          <div>{errMsg}</div>
+          <div>{msg}</div>
         </Form>
       </div>
     </div>
