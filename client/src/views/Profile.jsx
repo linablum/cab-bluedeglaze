@@ -10,28 +10,6 @@ function Profile() {
 
   // const updateProfile = async () => {};
 
-  /*   const deleteProfile = async () => {
-    const token = getToken();
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-    };
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/delete",
-        requestOptions
-      );
-      const result = await response.json();
-      console.log("result", result);
-      setUserProfile(false);
-    } catch (error) {
-      console.log("error deleting profile", error);
-      setError("deleting not possible");
-    }
-  }; */
-
   const deleteProfile = async () => {
     const token = getToken();
     try {

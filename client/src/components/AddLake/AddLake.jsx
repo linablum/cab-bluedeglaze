@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./AddLake.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useHandleSubmit from "../../utils/useHandleSubmit";
+import { AuthContext } from "../../context/AuthContext";
 
 function AddLake() {
   const [newLake, setNewLake] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const { userProfile } = useContext(AuthContext);
   const { handleSubmit, validated } = useHandleSubmit();
 
   const submitForm = async (e) => {
@@ -45,7 +46,7 @@ function AddLake() {
       "lakePicture",
       newLake.lakePicture ? newLake.lakePicture : ""
     );
-    // urlencoded.append("author", );
+    urlencoded.append("author", userProfile.userName);
 
     var requestOptions = {
       method: "POST",

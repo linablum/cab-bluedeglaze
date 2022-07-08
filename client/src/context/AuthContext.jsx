@@ -14,79 +14,28 @@ export const AuthContextProvider = (props) => {
   const [loginUser, setLoginUser] = useState({});
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState(null);
+  const [errMsg, setErrMsg] = useState(null);
   //const redirectTo = useNavigate();
 
-  //const { submitForm } = usePicUpload();
   const submitForm = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", selectedFile);
-    console.log("formData", formData);
-    const requestOptions = {
-      method: "POST",
-      body: formData,
-    };
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/imageUpload",
-        requestOptions
-      );
-      const result = await response.json();
-      setNewUser({ ...newUser, avatarPicture: result.imageUrL });
-      console.log(newUser);
-    } catch (error) {
-      console.log('"error submiting picture"', error);
-    }
-  };
-
-  /*   const submitForm = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-    console.log("formData", formData);
     try {
       const res = await axios.post(
         "http://localhost:5000/api/users/imageUpload",
-        {
-          data: formData,
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        formData
       );
-      console.log(res.data);
       setNewUser({ ...newUser, avatarPicture: res.data.imageUrL });
-      console.log(newUser);
-    } catch (error) {
-      console.log('"error submiting picture"', error);
-    }
-  };
- */
-  /* const submitForm = async (e) => {
-    try {
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append("image", selectedFile);
-      console.log("formData", formData);
-      await axios
-        .post("http://localhost:5000/api/users/imageUpload", {
-          data: formData,
-        })
-        .then((res) => {
-          const img = res.data;
-          console.log(res.data);
-          console.log(img);
-        })
-        .catch((err) => console.log(err));
-      //  console.log(res.data);
-      // setNewUser({ ...newUser, avatarPicture: res.data.imageUrL });
-      //  console.log(newUser);
+      console.log("Image uploaded");
     } catch (error) {
       console.log('"error submiting picture"', error);
     }
   };
 
-  */ const signUp = async () => {
+  const signUp = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/users/signUp", {
+      await axios.post("http://localhost:5000/api/users/signUp", {
         userName: newUser.userName,
         name: newUser.name,
         email: newUser.email,
@@ -95,9 +44,11 @@ export const AuthContextProvider = (props) => {
           ? newUser.avatarPicture
           : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
       });
-      console.log("results", res.data);
+      console.log("Signup successful");
     } catch (error) {
       console.log("error fetching", error);
+      setErrMsg(error.response.data.message);
+      console.log(error.response.data.message);
     }
   };
 
@@ -177,6 +128,7 @@ export const AuthContextProvider = (props) => {
         setUserProfile,
         setError,
         error,
+        errMsg,
       }}
     >
       {props.children}

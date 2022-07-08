@@ -8,7 +8,7 @@ import useHandleSubmit from "../utils/useHandleSubmit";
 import { AuthContext } from "../context/AuthContext";
 
 function SignUp() {
-  const { newUser, setNewUser, setSelectedFile, signUp, submitForm } =
+  const { newUser, setNewUser, setSelectedFile, signUp, submitForm, errMsg } =
     useContext(AuthContext);
 
   const { handleSubmit, validated } = useHandleSubmit();
@@ -52,6 +52,7 @@ function SignUp() {
               <Form.Group className="mb-3" controlId="formBasicName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
+                  required
                   name="name"
                   value={newUser.name ? newUser.name : ""}
                   type="text"
@@ -104,6 +105,7 @@ function SignUp() {
           <Button type="submit" className="signButton">
             Signup
           </Button>
+          <div>{errMsg}</div>
         </Form>
       </div>
     </div>

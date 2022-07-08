@@ -25,9 +25,14 @@ const uploadUserPicture = async (req, res) => {
 const signUp = async (req, res) => {
   try {
     console.log(req.body);
-    const existingUser = await User.findOne({ email: req.body.email });
-    if (existingUser) {
-      res.status(409).json({ message: "User already exists!" });
+    const existingMail = await User.findOne({ email: req.body.email });
+    const existingUser = await User.findOne({ userName: req.body.userName });
+    if (existingMail) {
+      res.status(409).json({ message: "This email adress is already used." });
+    } else if (existingUser) {
+      res.status(409).json({
+        message: "User already exists. Please choose another username.",
+      });
     } else {
       const hashedPassword = await encryptPassword(req.body.password);
       console.log("hashedPassword", hashedPassword);

@@ -11,10 +11,11 @@ const lakeSchema = new Schema({
   location: String,
   lakePicture: String,
   shortDescription: String,
-  author: { type: Schema.Types.ObjectId, ref: "User" },
+  author: String,
+  /*  { type: Schema.Types.ObjectId, ref: "User" }, */
   meta: {
-    bookmarks: { type: Number, default: 0 },
-    likes: { type: Number, default: 0 },
+    bookmarks: { type: Array },
+    likes: { type: Array },
   },
 });
 

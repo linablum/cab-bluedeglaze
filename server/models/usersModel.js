@@ -31,14 +31,14 @@ const userSchema = new Schema({
     type: String,
     //  default:"",
   },
-  likes: {
+  /*   likes: {
     type: Array,
     default: [],
   },
   bookmarks: {
     type: Array,
     default: [],
-  },
+  }, */
   addedlakes: [
     {
       type: Schema.Types.ObjectId,

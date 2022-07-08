@@ -87,6 +87,7 @@ const addNewLake = async (req, res) => {
         location: req.body.location,
         shortDescription: req.body.shortDescription,
         lakePicture: req.body.lakePicture,
+        author: req.body.author,
       });
       try {
         const savedLake = await NewLake.save();
@@ -97,6 +98,7 @@ const addNewLake = async (req, res) => {
             location: savedLake.location,
             shortDescription: savedLake.shortDescription,
             lakePicture: savedLake.lakePicture,
+            author: savedLake.author,
           },
           message: "Lake added",
         });
