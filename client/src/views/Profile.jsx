@@ -3,10 +3,14 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { getToken } from "../utils/getToken.js";
 import "./views.css";
+import UpdateProfile from "../components/UpdateProfile/UpdateProfile";
+import { useState } from "react";
 
 function Profile() {
   const { userProfile, setUserProfile, error, setError, logOut } =
     useContext(AuthContext);
+
+  const [visible, setVisible] = useState(null);
 
   // const updateProfile = async () => {};
 
@@ -31,22 +35,34 @@ function Profile() {
   return (
     <div>
       <h2>Profile</h2>
-      {userProfile && (
-        <div>
-          <p>{userProfile.userName}</p>
-          <p>{userProfile.email}</p>
-          <img
-            src={userProfile.avatarPicture}
-            className="avatar"
-            alt="userpicture"
-          />
+      {visible ? (
+        <UpdateProfile />
+      ) : (
+        userProfile && (
           <div>
-            <button className="signButton">Update Profile</button>
-            <button className="signButton" onClick={deleteProfile}>
-              Delete Profile
-            </button>
+            <p>{userProfile.userName}</p>
+            <p>{userProfile.name}</p>
+            <p>{userProfile.email}</p>
+            <img
+              src={userProfile.avatarPicture}
+              className="avatar"
+              alt="userpicture"
+            />
+            <div>
+              <button
+                className="signButton"
+                onClick={() => {
+                  setVisible(true);
+                }}
+              >
+                Update Profile
+              </button>
+              <button className="signButton" onClick={deleteProfile}>
+                Delete Profile
+              </button>
+            </div>
           </div>
-        </div>
+        )
       )}
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
