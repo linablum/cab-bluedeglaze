@@ -141,31 +141,42 @@ const deleteUser = async (req, res) => {
   });
 }; */
 
-const updateProfile = async (req, res) => {
+/* const updateProfile = async (req, res) => {
   console.log(req.body._id);
   try {
+  const hashedPassword = await encryptPassword(req.body.password);
     const doc = await User.findByIdAndUpdate(req.body.id, {
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       avatarPicture: req.body.avatarPicture,
     });
     res.status(201).json({
-      message: "User updated",
+      message: "User profile updated",
     });
   } catch (error) {
     res.status(409).json({ message: "Error while saving.", error: error });
   }
-};
+}; */
 
-/*   const doc = await User.findOne({ email: req.user.email });
-  doc.save({
-    userName: req.body.name,
-    name: req.body.name,
-    email: req.body.email,
-    avatarPicture: req.body.avatarPicture,
-  });
-  await doc.save(); */
+const updateProfile = async (req, res) => {
+  try {
+    const doc = await User.findById(req.body.id);
+    doc.name = req.body.name;
+    doc.email = req.body.email;
+    doc.avatarPicture = req.body.avatarPicture;
+    const hashedPassword = await encryptPassword(req.body.password);
+    doc.password = hashedPassword;
+    /*    {   userName: req.body.name,
+      name: req.body.name,
+      email: req.body.email,
+      avatarPicture: req.body.avatarPicture,
+    }; */
+    await doc.save();
+  } catch (error) {
+    res.status(409).json({ message: "Error while saving.", error: error });
+  }
+};
 
 export {
   uploadUserPicture,

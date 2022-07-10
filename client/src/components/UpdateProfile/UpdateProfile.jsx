@@ -39,7 +39,7 @@ function UpdateProfile() {
         }
       );
       setMsg("Update successful.");
-      console.log("update successful");
+      console.log("Update successful");
     } catch (error) {
       console.log("error fetching", error);
       setMsg(error.response.data.message);
@@ -131,10 +131,18 @@ function UpdateProfile() {
               Upload picture
             </Button>
           </Form.Group>
-          {<img src={userProfile.avatarPicture} alt="userPic" />}
-          <Button type="submit" className="signButton">
-            Update Profile
-          </Button>
+          {
+            <img
+              src={userProfile.avatarPicture}
+              alt="userPic"
+              className="avatar"
+            />
+          }
+          <div>
+            <Button type="submit" className="signButton">
+              Update Profile
+            </Button>
+          </div>
           <div>{msg}</div>
         </Form>
       </div>

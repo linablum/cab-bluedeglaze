@@ -27,7 +27,7 @@ function Profile() {
       logOut();
     } catch (error) {
       console.log("error deleting profile", error);
-      setError("deleting not possible");
+      setError("Deleting not possible");
     }
   };
 
