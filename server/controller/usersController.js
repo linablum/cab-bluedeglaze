@@ -106,10 +106,13 @@ const logIn = async (req, res) => {
 const getProfile = (req, res) => {
   console.log("req.user", req.user);
   res.status(200).json({
+    id: req.user.id,
     email: req.user.email,
     userName: req.user.userName,
+    name: req.user.name,
     avatar: req.user.avatarPicture,
   });
+  console.log(req.user.id);
 };
 
 const deleteUser = async (req, res) => {
@@ -119,10 +122,11 @@ const deleteUser = async (req, res) => {
   });
 };
 
-const updateProfile = async (req, res) => {
-  const updateUser = await User.updateOne(
+/* const updateProfile = async (req, res) => {
+  const updateUser = await User.findOneAndUpdate(
     { email: req.user.email },
     {
+      userName: req.body.name,
       name: req.body.name,
       email: req.body.email,
       avatarPicture: req.body.avatarPicture,
@@ -135,7 +139,33 @@ const updateProfile = async (req, res) => {
     name: req.user.name,
     avatar: req.user.avatarPicture,
   });
+}; */
+
+const updateProfile = async (req, res) => {
+  console.log(req.body._id);
+  try {
+    const doc = await User.findByIdAndUpdate(req.body.id, {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      avatarPicture: req.body.avatarPicture,
+    });
+    res.status(201).json({
+      message: "User updated",
+    });
+  } catch (error) {
+    res.status(409).json({ message: "Error while saving.", error: error });
+  }
 };
+
+/*   const doc = await User.findOne({ email: req.user.email });
+  doc.save({
+    userName: req.body.name,
+    name: req.body.name,
+    email: req.body.email,
+    avatarPicture: req.body.avatarPicture,
+  });
+  await doc.save(); */
 
 export {
   uploadUserPicture,

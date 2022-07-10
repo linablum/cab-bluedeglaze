@@ -5,13 +5,46 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "../../views/Signup.css";
 import useHandleSubmit from "../../utils/useHandleSubmit";
+import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import { getToken } from "../../utils/getToken";
 
 function UpdateProfile() {
-  const { setSelectedFile, userProfile, setUserProfile, submitForm, msg } =
-    useContext(AuthContext);
+  const {
+    setSelectedFile,
+    userProfile,
+    setUserProfile,
+    submitForm,
+    msg,
+    setMsg,
+  } = useContext(AuthContext);
 
   const { handleSubmit, validated } = useHandleSubmit();
+
+  const updateProfile = async () => {
+    console.log(userProfile);
+    const token = getToken();
+    try {
+      await axios.post(
+        "http://localhost:5000/api/users/profile",
+        {
+          id: userProfile.id,
+          name: userProfile.name,
+          email: userProfile.email,
+          password: userProfile.password,
+          avatarPicture: userProfile.avatarPicture,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setMsg("Update successful.");
+      console.log("update successful");
+    } catch (error) {
+      console.log("error fetching", error);
+      setMsg(error.response.data.message);
+    }
+  };
 
   const handleChangeHandler = (e) => {
     setUserProfile({ ...userProfile, [e.target.name]: e.target.value });
@@ -28,7 +61,7 @@ function UpdateProfile() {
           noValidate
           validated={validated}
           onSubmit={(e) => {
-            handleSubmit(e);
+            handleSubmit(e, updateProfile);
           }}
         >
           <Row>

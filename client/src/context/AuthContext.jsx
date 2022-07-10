@@ -98,6 +98,7 @@ export const AuthContextProvider = (props) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUserProfile({
+        id: res.data.id,
         email: res.data.email,
         userName: res.data.userName,
         name: res.data.name,
@@ -133,6 +134,7 @@ export const AuthContextProvider = (props) => {
         setError,
         error,
         msg,
+        setMsg,
       }}
     >
       {props.children}

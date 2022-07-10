@@ -5,14 +5,13 @@ import { getToken } from "../utils/getToken.js";
 import "./views.css";
 import UpdateProfile from "../components/UpdateProfile/UpdateProfile";
 import { useState } from "react";
+import useHandleSubmit from "../utils/useHandleSubmit";
 
 function Profile() {
-  const { userProfile, setUserProfile, error, setError, logOut } =
+  const { userProfile, setUserProfile, error, setError, logOut, msg, setMsg } =
     useContext(AuthContext);
 
   const [visible, setVisible] = useState(null);
-
-  // const updateProfile = async () => {};
 
   const deleteProfile = async () => {
     const token = getToken();
