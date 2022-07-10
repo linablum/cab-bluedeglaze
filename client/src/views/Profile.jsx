@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { getToken } from "../utils/getToken.js";
 import "./views.css";
 import UpdateProfile from "../components/UpdateProfile/UpdateProfile";
-import { useState } from "react";
-import useHandleSubmit from "../utils/useHandleSubmit";
 
 function Profile() {
-  const { userProfile, setUserProfile, error, setError, logOut, msg, setMsg } =
+  const { userProfile, setUserProfile, error, setError, logOut } =
     useContext(AuthContext);
 
   const [visible, setVisible] = useState(null);
@@ -16,13 +14,9 @@ function Profile() {
   const deleteProfile = async () => {
     const token = getToken();
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/users/delete",
-        null,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await axios.post("http://localhost:5000/api/users/delete", null, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setUserProfile(false);
       logOut();
     } catch (error) {

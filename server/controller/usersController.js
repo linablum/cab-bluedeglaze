@@ -123,26 +123,6 @@ const deleteUser = async (req, res) => {
 };
 
 /* const updateProfile = async (req, res) => {
-  const updateUser = await User.findOneAndUpdate(
-    { email: req.user.email },
-    {
-      userName: req.body.name,
-      name: req.body.name,
-      email: req.body.email,
-      avatarPicture: req.body.avatarPicture,
-    }
-  );
-  res.status(200).json({
-    msg: "account updated",
-    userName: req.user.userName,
-    email: req.user.email,
-    name: req.user.name,
-    avatar: req.user.avatarPicture,
-  });
-}; */
-
-/* const updateProfile = async (req, res) => {
-  console.log(req.body._id);
   try {
   const hashedPassword = await encryptPassword(req.body.password);
     const doc = await User.findByIdAndUpdate(req.body.id, {

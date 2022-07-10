@@ -27,6 +27,15 @@ function Lakes() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchFavourite = async () => {
+      const res = await fetch(
+        "http://localhost:5000/api/lakes/favourites"
+      ).catch(console.log("Error"));
+      const data = await res.json();
+    };
+  });
+
   return (
     <div className="lakeContainer">
       <Row xs={1} md={2} className="g-4">
@@ -35,7 +44,7 @@ function Lakes() {
             const addFavourite = async () => {
               const token = getToken();
               try {
-                const res = await axios.post(
+                await axios.post(
                   "http://localhost:5000/api/lakes/favourite",
                   { id: lake._id, userName: userProfile.userName },
                   {
