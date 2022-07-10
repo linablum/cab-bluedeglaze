@@ -173,6 +173,9 @@ const updateProfile = async (req, res) => {
       avatarPicture: req.body.avatarPicture,
     }; */
     await doc.save();
+    res.status(201).json({
+      message: "User profile updated",
+    });
   } catch (error) {
     res.status(409).json({ message: "Error while saving.", error: error });
   }

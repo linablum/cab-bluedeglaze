@@ -117,4 +117,25 @@ const addNewLake = async (req, res) => {
 
 const editLake = async () => {};
 
-export { getAllLakes, getLakesByArea, addNewLake, uploadLakePicture, editLake };
+const addFavourite = async (req, res) => {
+  try {
+    console.log(req.body);
+    const doc = await Lake.findById(req.body.id);
+    doc.likes = req.body.userName;
+    await doc.save();
+    res.status(201).json({
+      message: "You liked that lake",
+    });
+  } catch (error) {
+    res.status(409).json({ message: "Error while saving.", error: error });
+  }
+};
+
+export {
+  getAllLakes,
+  getLakesByArea,
+  addNewLake,
+  uploadLakePicture,
+  editLake,
+  addFavourite,
+};

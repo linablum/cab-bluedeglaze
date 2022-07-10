@@ -12,11 +12,8 @@ const lakeSchema = new Schema({
   lakePicture: String,
   shortDescription: String,
   author: String,
-  /*  { type: Schema.Types.ObjectId, ref: "User" }, */
-  meta: {
-    bookmarks: { type: Array },
-    likes: { type: Array },
-  },
+  likes: Array,
+  bookmarks: Array,
 });
 
 const Lake = mongoose.model("Lake", lakeSchema);

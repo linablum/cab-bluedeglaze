@@ -1,5 +1,6 @@
 import "./Lakes.css";
 import { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -7,9 +8,10 @@ import Button from "react-bootstrap/Button";
 import { AuthContext } from "../context/AuthContext";
 import { SuitHeart } from "react-bootstrap-icons";
 import LakeDetailsModal from "../components/LakeDetailsModal/LakeDetailsModal";
+import { getToken } from "../utils/getToken.js";
 
 function Lakes() {
-  const { user } = useContext(AuthContext);
+  const { user, userProfile } = useContext(AuthContext);
   const [lakes, setLakes] = useState([]);
   const [modalShow, setModalShow] = useState(false);
 
@@ -30,6 +32,21 @@ function Lakes() {
       <Row xs={1} md={2} className="g-4">
         {lakes &&
           lakes.map((lake) => {
+            const addFavourite = async () => {
+              const token = getToken();
+              try {
+                const res = await axios.post(
+                  "http://localhost:5000/api/lakes/favourite",
+                  { id: lake._id, userName: userProfile.userName },
+                  {
+                    headers: { Authorization: `Bearer ${token}` },
+                  }
+                );
+                console.log("Update successful");
+              } catch (error) {
+                console.log("error adding favourite", error);
+              }
+            };
             return (
               <>
                 <Col>
@@ -43,7 +60,11 @@ function Lakes() {
                         little bit longer.
                       </Card.Text>
                       <Card.Text>
-                        <SuitHeart className="likeIcon" /> {lake.meta.likes}
+                        <SuitHeart
+                          className="likeIcon"
+                          onClick={addFavourite}
+                        />
+                        {lake.likes.length}
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
