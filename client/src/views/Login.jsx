@@ -27,7 +27,7 @@ function Login() {
             noValidate
             validated={validated}
             onSubmit={(e) => {
-              handleSubmit(e, logIn), ;
+              handleSubmit(e, logIn);
             }}
           >
             <Form.Group className="mb-3" controlId="formBasicEmail">

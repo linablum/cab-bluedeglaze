@@ -6,8 +6,8 @@ import { AuthContext } from "../context/AuthContext";
 function Logout() {
   const { logOut } = useContext(AuthContext);
   return (
-    <Button onClick={logOut} variant="danger" className="logoutButton">
-      logout
+    <Button onClick={logOut} variant="dark" className="logoutButton">
+      LOGOUT
     </Button>
   );
 }

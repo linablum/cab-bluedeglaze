@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { AuthContext } from "../../context/AuthContext";
+import Logout from "../Logout";
 
 function NavBar() {
   const { user } = useContext(AuthContext);
@@ -30,9 +31,7 @@ function NavBar() {
               lakes
             </Nav.Link>
             {user ? (
-              <Nav.Link className="nav-link" href="/logout">
-                logout
-              </Nav.Link>
+              ""
             ) : (
               <Nav.Link className="nav-link" href="/login">
                 login
@@ -41,9 +40,15 @@ function NavBar() {
           </Nav>
           <Nav>
             {user ? (
-              <Nav.Link className="nav-link" href="/profile">
-                profile
-              </Nav.Link>
+              <>
+                <Nav.Link className="nav-link" href="/profile">
+                  profile
+                </Nav.Link>
+                <Logout />
+                {/* <Nav.Link className="nav-link" href="/logout">
+                  logout
+                </Nav.Link> */}
+              </>
             ) : (
               ""
             )}

@@ -1,4 +1,4 @@
-import "./Lakes.css";
+import "./views.css";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
