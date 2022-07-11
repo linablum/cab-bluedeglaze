@@ -78,8 +78,6 @@ const logIn = async (req, res) => {
       req.body.password,
       existingUser.password
     );
-    console.log("exisiting user password", existingUser.password);
-    console.log("exisiting user password", req.body.password);
     if (!verified) {
       res.status(401).json({
         msg: "wrong password",
@@ -104,7 +102,6 @@ const logIn = async (req, res) => {
 };
 
 const getProfile = (req, res) => {
-  console.log("req.user", req.user);
   res.status(200).json({
     id: req.user.id,
     email: req.user.email,
@@ -112,11 +109,10 @@ const getProfile = (req, res) => {
     name: req.user.name,
     avatar: req.user.avatarPicture,
   });
-  console.log(req.user.id);
 };
 
 const deleteUser = async (req, res) => {
-  const deleteUser = await User.deleteOne({ email: req.user.email });
+  await User.deleteOne({ email: req.user.email });
   res.status(200).json({
     msg: "account deleted",
   });

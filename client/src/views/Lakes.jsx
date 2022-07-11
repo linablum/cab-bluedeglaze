@@ -15,26 +15,35 @@ function Lakes() {
   const [lakes, setLakes] = useState([]);
   const [modalShow, setModalShow] = useState(false);
 
+  console.log("user", userProfile.userName);
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("http://localhost:5000/api/lakes/all").catch(
         console.log("Error")
       );
       const data = await res.json();
-      console.log(data);
+      console.log("all", data);
       setLakes(data);
     };
     fetchData();
+    getFavourites(userProfile.userName);
   }, []);
 
-  useEffect(() => {
-    const fetchFavourite = async () => {
-      const res = await fetch(
-        "http://localhost:5000/api/lakes/favourites"
-      ).catch(console.log("Error"));
-      const data = await res.json();
-    };
-  });
+  const getFavourites = async (userName) => {
+    try {
+      const token = getToken();
+      const res = await axios.get(
+        "http://localhost:5000/api/lakes/favourite/${userName)",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log("favs", res.data);
+    } catch (error) {
+      console.log("error getting your favourites", error);
+    }
+  };
 
   return (
     <div className="lakeContainer">
@@ -59,7 +68,7 @@ function Lakes() {
             return (
               <>
                 <Col>
-                  <Card key={lake.name}>
+                  <Card key={lake._id}>
                     <Card.Img variant="top" src="holder.js/100px160" />
                     <Card.Body>
                       <Card.Title>{lake.name}</Card.Title>
@@ -89,10 +98,10 @@ function Lakes() {
                       >
                         More
                       </Button>
-                      <LakeDetailsModal
+                      {/*  <LakeDetailsModal
                         show={modalShow}
                         onHide={() => setModalShow(false)}
-                      />
+                      /> */}
                     </Card.Footer>
                   </Card>
                 </Col>

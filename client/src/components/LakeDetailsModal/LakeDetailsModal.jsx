@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -58,3 +58,4 @@ function LakeDetailsModal(props) {
 }
 
 export default LakeDetailsModal;
+ */

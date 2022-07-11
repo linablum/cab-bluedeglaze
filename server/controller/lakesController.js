@@ -31,7 +31,7 @@ const getLakesByArea = async (req, res) => {
   if (likes) {
     const lakesByArea = await Lake.find({
       area: req.params.area,
-      "meta.likes": { $gte: likes },
+      "likes": { $gte: likes },
     })
       .populate({ path: "author" })
       .exec();
@@ -56,7 +56,6 @@ const getLakesByArea = async (req, res) => {
 }; */
 
 const uploadLakePicture = async (req, res) => {
-  console.log("req.body", req.body);
   try {
     console.log("req.file", req.file);
     const uploadResult = await cloudinary.uploader.upload(req.file.path, {
@@ -131,6 +130,21 @@ const addFavourite = async (req, res) => {
   }
 };
 
+const getFavourites = async (req, res) => {
+  try {
+    console.log("username", req.params.userName);
+    const favs = await Lake.find({
+      likes: req.params.userName,
+    }).exec();
+    res.status(200).json(favs);
+  } catch (error) {
+    res.status(500).json({
+      error: error,
+      message: "Something went wrong getting all your favourites.",
+    });
+  }
+};
+
 export {
   getAllLakes,
   getLakesByArea,
@@ -138,4 +152,5 @@ export {
   uploadLakePicture,
   editLake,
   addFavourite,
+  getFavourites,
 };
