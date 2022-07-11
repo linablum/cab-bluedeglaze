@@ -33,9 +33,9 @@ function Profile() {
       ) : (
         userProfile && (
           <div>
-            <p>{userProfile.userName}</p>
-            <p>{userProfile.name}</p>
-            <p>{userProfile.email}</p>
+            <p>username: {userProfile.userName}</p>
+            <p>name: {userProfile.name}</p>
+            <p>email: {userProfile.email}</p>
             <img
               src={userProfile.avatarPicture}
               className="avatar"
@@ -49,7 +49,7 @@ function Profile() {
                 }}
               >
                 Update Profile
-              </button>
+              </button>{" "}
               <button className="signButton" onClick={deleteProfile}>
                 Delete Profile
               </button>

@@ -1,13 +1,14 @@
 import React from "react";
+import Button from "react-bootstrap/esm/Button";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 function Logout() {
   const { logOut } = useContext(AuthContext);
   return (
-    <button onClick={logOut} style={{ backgroundColor: "red" }}>
+    <Button onClick={logOut} variant="danger" className="logoutButton">
       logout
-    </button>
+    </Button>
   );
 }
 

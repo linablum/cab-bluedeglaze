@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./NavBar.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
+import { AuthContext } from "../../context/AuthContext";
 
 function NavBar() {
+  const { user } = useContext(AuthContext);
+
   return (
     <Navbar className="navbar" collapseOnSelect expand="lg">
       <Container>
@@ -26,14 +29,24 @@ function NavBar() {
             <Nav.Link className="nav-link" href="/lakes">
               lakes
             </Nav.Link>
-            <Nav.Link className="nav-link" href="/login">
-              login
-            </Nav.Link>
+            {user ? (
+              <Nav.Link className="nav-link" href="/logout">
+                logout
+              </Nav.Link>
+            ) : (
+              <Nav.Link className="nav-link" href="/login">
+                login
+              </Nav.Link>
+            )}
           </Nav>
           <Nav>
-            <Nav.Link className="nav-link" href="/profile">
-              profile
-            </Nav.Link>
+            {user ? (
+              <Nav.Link className="nav-link" href="/profile">
+                profile
+              </Nav.Link>
+            ) : (
+              ""
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

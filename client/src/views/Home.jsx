@@ -1,5 +1,5 @@
 import LandingCarousel from "../components/Carousel/Carousel";
-import "./Home.css";
+import "./views.css";
 
 function Home() {
   return (

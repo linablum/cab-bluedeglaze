@@ -14,8 +14,9 @@ function Lakes() {
   const { user, userProfile } = useContext(AuthContext);
   const [lakes, setLakes] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [favourites, setFavourites] = useState({});
 
-  console.log("user", userProfile.userName);
+  console.log("user", userProfile);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +28,6 @@ function Lakes() {
       setLakes(data);
     };
     fetchData();
-    getFavourites(userProfile.userName);
   }, []);
 
   const getFavourites = async (userName) => {
@@ -40,11 +40,17 @@ function Lakes() {
         }
       );
       console.log("favs", res.data);
+      setFavourites(res.data);
     } catch (error) {
       console.log("error getting your favourites", error);
     }
   };
 
+  /*   const isFav = { favourites.some(e) => {
+    if (e === )
+
+  }}
+ */
   return (
     <div className="lakeContainer">
       <Row xs={1} md={2} className="g-4">
@@ -81,7 +87,7 @@ function Lakes() {
                         <SuitHeart
                           className="likeIcon"
                           onClick={addFavourite}
-                        />
+                        />{" "}
                         {lake.likes.length}
                       </Card.Text>
                     </Card.Body>
@@ -92,12 +98,7 @@ function Lakes() {
                     </Card.Footer>
                     <Card.Footer>
                       {/*                       <small className="text-muted">More Details</small> */}
-                      <Button
-                        className="signButton"
-                        onClick={() => setModalShow(true)}
-                      >
-                        More
-                      </Button>
+                      <Button onClick={() => setModalShow(true)}>More</Button>
                       {/*  <LakeDetailsModal
                         show={modalShow}
                         onHide={() => setModalShow(false)}

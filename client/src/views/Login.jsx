@@ -1,5 +1,5 @@
 import React from "react";
-import "./Login.css";
+import "./views.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Form from "react-bootstrap/Form";
@@ -27,7 +27,7 @@ function Login() {
             noValidate
             validated={validated}
             onSubmit={(e) => {
-              handleSubmit(e, logIn);
+              handleSubmit(e, logIn), ;
             }}
           >
             <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -66,9 +66,10 @@ export const AuthContextProvider = (props) => {
         console.log("error seting token");
       }
       console.log("result", res.data);
+      setUser(true);
+      redirectTo("../", { replace: true });
     } catch (error) {
       console.log("login error", error);
-      console.log(error.response.data.msg);
       setMsg(error.response.data.msg);
     }
   };
@@ -112,6 +113,7 @@ export const AuthContextProvider = (props) => {
   const logOut = () => {
     localStorage.removeItem("token");
     setUser(false);
+    redirectTo("../login", { replace: true });
   };
 
   return (
