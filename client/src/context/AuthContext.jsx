@@ -12,7 +12,7 @@ export const AuthContextProvider = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [newUser, setNewUser] = useState({});
   const [loginUser, setLoginUser] = useState({});
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState([]);
   const [error, setError] = useState(null);
   const [msg, setMsg] = useState(null);
   const redirectTo = useNavigate();

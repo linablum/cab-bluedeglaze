@@ -23,7 +23,7 @@ function LandingCarousel() {
                 </p>
               </Carousel.Caption>
               <Col>
-                <img className="" src={Pic} alt="First slide" />
+                <img className="carouselImage" src={Pic} alt="First slide" />
               </Col>
             </Col>
           </Row>

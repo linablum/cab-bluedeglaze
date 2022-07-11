@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../context/AuthContext";
-import { SuitHeart } from "react-bootstrap-icons";
+import { CheckLg, SuitHeart, SuitHeartFill } from "react-bootstrap-icons";
 import LakeDetailsModal from "../components/LakeDetailsModal/LakeDetailsModal";
 import { getToken } from "../utils/getToken.js";
 
@@ -14,9 +14,7 @@ function Lakes() {
   const { user, userProfile } = useContext(AuthContext);
   const [lakes, setLakes] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [favourites, setFavourites] = useState({});
-
-  console.log("user", userProfile);
+  const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +32,7 @@ function Lakes() {
     try {
       const token = getToken();
       const res = await axios.get(
-        "http://localhost:5000/api/lakes/favourite/${userName)",
+        `http://localhost:5000/api/lakes/favourite/${userName}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -46,16 +44,21 @@ function Lakes() {
     }
   };
 
-  /*   const isFav = { favourites.some(e) => {
-    if (e === )
-
-  }}
- */
   return (
     <div className="lakeContainer">
       <Row xs={1} md={2} className="g-4">
         {lakes &&
-          lakes.map((lake) => {
+          getFavourites(userProfile.userName) &&
+          lakes.map((lake, i) => {
+            let isFav = favourites.some((e) => {
+              console.log("fav", e._id);
+              console.log(lake._id);
+              if (e._id === lake._id) {
+                return true;
+              }
+              return false;
+            });
+            console.log("isFav", isFav);
             const addFavourite = async () => {
               const token = getToken();
               try {
@@ -72,9 +75,9 @@ function Lakes() {
               }
             };
             return (
-              <>
+              <div key={i}>
                 <Col>
-                  <Card key={lake._id}>
+                  <Card>
                     <Card.Img variant="top" src="holder.js/100px160" />
                     <Card.Body>
                       <Card.Title>{lake.name}</Card.Title>
@@ -84,10 +87,11 @@ function Lakes() {
                         little bit longer.
                       </Card.Text>
                       <Card.Text>
-                        <SuitHeart
-                          className="likeIcon"
-                          onClick={addFavourite}
-                        />{" "}
+                        {isFav ? (
+                          <SuitHeartFill color="blue" />
+                        ) : (
+                          <SuitHeart color="lightblue" onClick={addFavourite} />
+                        )}{" "}
                         {lake.likes.length}
                       </Card.Text>
                     </Card.Body>
@@ -98,7 +102,9 @@ function Lakes() {
                     </Card.Footer>
                     <Card.Footer>
                       {/*                       <small className="text-muted">More Details</small> */}
-                      <Button onClick={() => setModalShow(true)}>More</Button>
+                      <Button onClick={() => setModalShow(true)} variant="dark">
+                        More
+                      </Button>
                       {/*  <LakeDetailsModal
                         show={modalShow}
                         onHide={() => setModalShow(false)}
@@ -106,7 +112,7 @@ function Lakes() {
                     </Card.Footer>
                   </Card>
                 </Col>
-              </>
+              </div>
             );
           })}
       </Row>

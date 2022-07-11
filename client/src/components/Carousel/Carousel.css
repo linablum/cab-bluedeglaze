@@ -24,6 +24,6 @@
   text-align: left;
 }
 
-img {
-  max-width: 80%;
+.carouselImage {
+  max-width: 50%;
 }
