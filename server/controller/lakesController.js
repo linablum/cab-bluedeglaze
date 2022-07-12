@@ -120,7 +120,7 @@ const addFavourite = async (req, res) => {
   try {
     console.log(req.body);
     const doc = await Lake.findById(req.body.id);
-    doc.likes = req.body.userName;
+    doc.likes.push(req.body.userName);
     await doc.save();
     res.status(201).json({
       message: "You liked that lake",
@@ -145,6 +145,22 @@ const getFavourites = async (req, res) => {
   }
 };
 
+const deleteFavourite = async (req, res) => {
+  try {
+    const doc = await Lake.findById(req.body.id);
+    doc.likes.remove(req.body.userName);
+    await doc.save();
+    res.status(200).json({
+      msg: "lake unliked",
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error,
+      message: "Deleting favourite not possible",
+    });
+  }
+};
+
 export {
   getAllLakes,
   getLakesByArea,
@@ -153,4 +169,5 @@ export {
   editLake,
   addFavourite,
   getFavourites,
+  deleteFavourite,
 };

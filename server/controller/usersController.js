@@ -143,11 +143,6 @@ const updateProfile = async (req, res) => {
     doc.avatarPicture = req.body.avatarPicture;
     const hashedPassword = await encryptPassword(req.body.password);
     doc.password = hashedPassword;
-    /*    {   userName: req.body.name,
-      name: req.body.name,
-      email: req.body.email,
-      avatarPicture: req.body.avatarPicture,
-    }; */
     await doc.save();
     res.status(201).json({
       message: "User profile updated",
