@@ -116,11 +116,28 @@ const addNewLake = async (req, res) => {
 
 const editLake = async () => {};
 
-const addFavourite = async (req, res) => {
+/* const addFavourite = async (req, res) => {
   try {
     console.log(req.body);
     const doc = await Lake.findById(req.body.id);
     doc.likes.push(req.body.userName);
+    await doc.save();
+    res.status(201).json({
+      message: "You liked that lake",
+    });
+  } catch (error) {
+    res.status(409).json({ message: "Error while saving.", error: error });
+  }
+};
+ */
+
+const addFavourite = async (req, res) => {
+  try {
+    console.log(req.body);
+    const doc = await Lake.findById(req.body.id);
+
+    if (doc.likes.includes(req.body.userName) === false)
+      doc.likes.push(req.body.userName);
     await doc.save();
     res.status(201).json({
       message: "You liked that lake",
@@ -146,10 +163,12 @@ const getFavourites = async (req, res) => {
 };
 
 const deleteFavourite = async (req, res) => {
+  console.log(req.body);
   try {
-    const doc = await Lake.findById(req.body.id);
-    doc.likes.remove(req.body.userName);
-    await doc.save();
+    await Lake.updateOne(
+      { _id: req.body.id },
+      { $pull: { likes: req.body.userName } }
+    );
     res.status(200).json({
       msg: "lake unliked",
     });

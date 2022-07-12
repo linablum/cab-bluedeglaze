@@ -23,8 +23,9 @@ function Lakes() {
     const fetchData = async () => {
       try {
         const res = await axios.get("http://localhost:5000/api/lakes/all");
+        setLakes(res.data);
         setTimeout(function () {
-          setLakes(res.data);
+          //    setLakes(res.data);
           setLoading(false);
         }, 3000);
         console.log("res", res.data);
@@ -55,7 +56,37 @@ function Lakes() {
     }
   };
 
-  const deleteFavourite = async () => {};
+  const addFavourite = async (lakeID) => {
+    const token = getToken();
+    try {
+      await axios.post(
+        "http://localhost:5000/api/lakes/favourite",
+        { id: lakeID, userName: userProfile.userName },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log("You liked that lake");
+    } catch (error) {
+      console.log("error adding favourite", error);
+    }
+  };
+
+  const deleteFavourite = async (lakeID) => {
+    const token = getToken();
+    try {
+      await axios.post(
+        "http://localhost:5000/api/lakes/unlike",
+        { id: lakeID, userName: userProfile.userName },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log("You unliked that lake");
+    } catch (error) {
+      console.log("error adding favourite", error);
+    }
+  };
 
   return (
     <>
@@ -66,29 +97,13 @@ function Lakes() {
           <Row xs={1} md={2} className="g-4">
             {lakes.map((lake, i) => {
               let isFav = favourites.some((e) => {
-                console.log("fav", e._id);
-                console.log(lake._id);
                 if (e._id === lake._id) {
                   return true;
                 }
                 return false;
               });
               console.log("isFav", isFav);
-              const addFavourite = async () => {
-                const token = getToken();
-                try {
-                  await axios.post(
-                    "http://localhost:5000/api/lakes/favourite",
-                    { id: lake._id, userName: userProfile.userName },
-                    {
-                      headers: { Authorization: `Bearer ${token}` },
-                    }
-                  );
-                  console.log("Update successful");
-                } catch (error) {
-                  console.log("error adding favourite", error);
-                }
-              };
+
               return (
                 <div key={i}>
                   <Col>
@@ -107,13 +122,16 @@ function Lakes() {
                         </Card.Text>
                         <Card.Text>
                           {isFav ? (
-                            <SuitHeartFill color="blue" />
+                            <SuitHeartFill
+                              color="blue"
+                              onClick={() => deleteFavourite(lake._id)}
+                            />
                           ) : (
                             <SuitHeart
                               color="lightblue"
-                              onClick={addFavourite}
+                              onClick={() => addFavourite(lake._id)}
                             />
-                          )}{" "}
+                          )}
                           {lake.likes.length}
                         </Card.Text>
                       </Card.Body>

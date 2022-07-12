@@ -21,6 +21,6 @@ router.post("/editlake", editLake);
 router.post("/imageUpload", multerUploads.single("image"), uploadLakePicture);
 router.post("/favourite", jwtAuth, addFavourite);
 router.get("/favourite/:userName", jwtAuth, getFavourites);
-router.post("/unlike", deleteFavourite);
+router.post("/unlike", jwtAuth, deleteFavourite);
 
 export default router;
