@@ -17,10 +17,13 @@ function LandingCarousel() {
           <Row className="carousel_row">
             <Col className="carousel_col_text">
               <Carousel.Caption className="carousel_caption">
-                <h3>Blue Deglaze</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
+                <h3>Escape The Heat</h3>
+                <div className="carousel_text">
+                  <p>
+                    Get out the of the city heat and enjoy some lake time! Find
+                    your favourite spot.
+                  </p>
+                </div>
               </Carousel.Caption>
               <Col>
                 <img className="carouselImage" src={Pic} alt="First slide" />

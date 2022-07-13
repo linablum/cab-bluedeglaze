@@ -24,10 +24,10 @@ function Lakes() {
       try {
         const res = await axios.get("http://localhost:5000/api/lakes/all");
         setLakes(res.data);
+        console.log(res.data);
         setTimeout(function () {
-          //    setLakes(res.data);
           setLoading(false);
-        }, 3000);
+        }, 2000);
         console.log("res", res.data);
       } catch (error) {
         console.log("error getting the lakes", error);
@@ -123,15 +123,17 @@ function Lakes() {
                         <Card.Text>
                           {isFav ? (
                             <SuitHeartFill
-                              color="blue"
+                              color="#ff6583"
+                              size="20px"
                               onClick={() => deleteFavourite(lake._id)}
                             />
                           ) : (
                             <SuitHeart
-                              color="lightblue"
+                              color="#000000"
+                              size="20px"
                               onClick={() => addFavourite(lake._id)}
                             />
-                          )}
+                          )}{" "}
                           {lake.likes.length}
                         </Card.Text>
                       </Card.Body>
@@ -144,7 +146,7 @@ function Lakes() {
                         {/*                       <small className="text-muted">More Details</small> */}
                         <Button
                           onClick={() => setModalShow(true)}
-                          variant="dark"
+                          variant="light"
                         >
                           More
                         </Button>

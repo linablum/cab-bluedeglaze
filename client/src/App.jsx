@@ -8,6 +8,7 @@ import Profile from "./views/Profile";
 import Lakes from "./views/Lakes";
 import Home from "./views/Home";
 import AddLake from "./components/AddLake/AddLake";
+import About from "./views/About";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/lakes" element={<Lakes />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/newlake" element={<AddLake />} />

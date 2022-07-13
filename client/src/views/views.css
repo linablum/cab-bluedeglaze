@@ -117,3 +117,18 @@ body {
 .likeIcon {
   font-size: 20px;
 }
+
+/* About */
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: 40px;
+}
+
+.aboutInnerContainer {
+  align-items: center;
+}

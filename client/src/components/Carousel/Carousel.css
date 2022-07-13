@@ -27,3 +27,8 @@
 .carouselImage {
   max-width: 50%;
 }
+
+.carousel_text {
+  font-size: 20px;
+  width: 470px;
+}

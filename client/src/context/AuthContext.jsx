@@ -113,7 +113,7 @@ export const AuthContextProvider = (props) => {
   const logOut = () => {
     localStorage.removeItem("token");
     setUser(false);
-    redirectTo("../login", { replace: true });
+    redirectTo("../", { replace: true });
   };
 
   return (
