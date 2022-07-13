@@ -20,7 +20,7 @@ body {
   position: absolute;
   width: 58%;
   height: 86%;
-  background-image: url(../assets/hero-bg.png);
+  background-image: url(../assets/bg.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   top: 50px;
@@ -34,6 +34,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin: 40px;
 }
 
 .innerContainerSignUp {
@@ -104,6 +105,7 @@ body {
   width: 40%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 40px;
 }
 
 /* Lakes */

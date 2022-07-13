@@ -91,7 +91,15 @@ function Lakes() {
   return (
     <>
       {loading ? (
-        <Spinner animation="grow" style={{ width: "10rem", height: "10rem" }} />
+        <Spinner
+          animation="grow"
+          style={{
+            width: "10rem",
+            height: "10rem",
+            margin: "40px",
+            color: "grey",
+          }}
+        />
       ) : (
         <div className="lakeContainer">
           <Row xs={1} md={2} className="g-4">
@@ -111,7 +119,7 @@ function Lakes() {
                       <Card.Img
                         variant="top"
                         className="cardImage"
-                        src="{lake.lakePicture}"
+                        src={lake.lakePicture}
                       />
                       <Card.Body>
                         <Card.Title>{lake.name}</Card.Title>
@@ -139,7 +147,7 @@ function Lakes() {
                       </Card.Body>
                       <Card.Footer>
                         <small className="text-muted">
-                          {lake.area} {lake.location}
+                          {lake.area} - {lake.location}
                         </small>
                       </Card.Footer>
                       <Card.Footer>

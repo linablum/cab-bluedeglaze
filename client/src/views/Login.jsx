@@ -2,6 +2,7 @@ import React from "react";
 import "./views.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useHandleSubmit from "../utils/useHandleSubmit";
@@ -61,6 +62,9 @@ function Login() {
             <Button className="signButton" type="submit">
               Login
             </Button>
+            <p>
+              Not have an account yet? Please <Link to="/signup">sign up</Link>.
+            </p>
           </Form>
         )}
       </div>

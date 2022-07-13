@@ -17,7 +17,7 @@ const router = express.Router();
 router.get("/all", getAllLakes);
 router.get("/area/:area", getLakesByArea);
 router.post("/newlake", addNewLake);
-router.post("/editlake", editLake);
+/* router.post("/editlake", editLake); */
 router.post("/imageUpload", multerUploads.single("image"), uploadLakePicture);
 router.post("/favourite", jwtAuth, addFavourite);
 router.get("/favourite/:userName", jwtAuth, getFavourites);
