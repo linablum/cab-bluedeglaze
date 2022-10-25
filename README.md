@@ -25,6 +25,8 @@ Following requirements were given:
 - SPA, modern JS framework
 - make it a Progresssvie Web App
 - Full-Stack (MERN)
+- use of CSS-Framework
+- optional: Google OAuth, user can edit own profile information, user can delete edit or delete comment
 
 
 ## Technologies Used
@@ -49,7 +51,7 @@ How to get a copy and locally run it:
    git clone https://github.com/linablum/cab-leafy
    ```
 
- #### React app
+ #### React app and NodeJS
 2. Install dependencies
    ```bash
    npm install
