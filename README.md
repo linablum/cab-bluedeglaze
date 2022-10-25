@@ -16,10 +16,15 @@ detailed information about all the refreshing opportunities in Berlin and Brande
 
 ## General Information
 
-It is part of Module 2 of Code Academy Berlin Web Developement Course. 
+It is part of Module 2 of Code Academy Berlin Web Developement Course. The goal was to deliver a Full-Stack Web Progressive Application, as a social app where you be able to comment, like and post new content.
 
 Following requirements were given:
-
+- topic of our choice
+- design mobile first
+- create at least 5 screens (landing, list, detail, register/login, profile screen)
+- SPA, modern JS framework
+- make it a Progresssvie Web App
+- Full-Stack (MERN)
 
 
 ## Technologies Used
@@ -65,7 +70,7 @@ Room for improvement:
 
 ## Images
 
-The copyright of all images belong to Dennis Falkowsky. Special thanks for providing.
+The copyright of all images belong to Dennis Falkowsky (IG: @dynaios). Special thanks for providing.
 
 
 ## Contact
