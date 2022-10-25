@@ -16,7 +16,7 @@ detailed information about all the refreshing opportunities in Berlin and Brande
 
 ## General Information
 
-It is part of Module 2 of Code Academy Berlin Web Developement Course. The goal was to deliver a Full-Stack Web Progressive Application, as a social app where you be able to comment, like and post new content.
+It is part of Module 2 of Code Academy Berlin Web Development Course. The goal was to deliver a Full-Stack Web Progressive Application, as a social app where you be able to comment, like and post new content.
 
 Following requirements were given:
 - topic of our choice
